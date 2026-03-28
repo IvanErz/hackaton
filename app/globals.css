@@ -4,6 +4,12 @@
   font-family: inherit;
 }
 
+/* Google PlaceAutocompleteElement (web component) — full width in search row */
+.zagreb-place-autocomplete-host gmp-place-autocomplete {
+  display: block;
+  width: 100%;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
