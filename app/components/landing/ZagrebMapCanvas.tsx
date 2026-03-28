@@ -2,7 +2,11 @@
 
 import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
-import { formatParkingPrice, isPlaceholderDistance } from "@/lib/parking-price-display";
+import {
+  formatGaragePriceLine,
+  formatParkingPrice,
+  isPlaceholderDistance,
+} from "@/lib/parking-price-display";
 import { ZAGREB_CENTER, type ParkingLocation } from "@/lib/mock-parking-spaces";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useCallback, useEffect, useRef } from "react";

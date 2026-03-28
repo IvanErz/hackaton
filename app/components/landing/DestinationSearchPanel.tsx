@@ -4,6 +4,7 @@ import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import { ZAGREB_CENTER } from "@/lib/mock-parking-spaces";
 import { formatGaragePriceLine } from "@/lib/parking-price-display";
+import { ZagrebPlaceAutocomplete } from "./ZagrebPlaceAutocomplete";
 import {
   formatDistance,
   googleMapsDirectionsFromCurrentLocationUrl,
