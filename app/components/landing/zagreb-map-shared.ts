@@ -3,6 +3,9 @@ import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 
 export const NEAREST_COUNT = 5;
 
+/** How many closest garages get highlighted directions links (≤ NEAREST_COUNT). */
+export const TOP_GARAGES_FOR_DIRECTIONS = 3;
+
 export function haversineMeters(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371000;
   const φ1 = (lat1 * Math.PI) / 180;
