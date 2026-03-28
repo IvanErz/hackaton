@@ -1382,28 +1382,7 @@
   }
 }
 
-.leaflet-div-icon.parking-marker-pin {
-  background: none !important;
-  border: none !important;
-}
-
-.parking-marker-dot {
-  background: #059669;
-  border: 2px solid #fff;
-  border-radius: 9999px;
-  width: 14px;
-  height: 14px;
-  display: block;
-  box-shadow: 0 1px 4px #00000059;
-}
-
-@media (prefers-color-scheme: dark) {
-  .parking-marker-dot {
-    border-color: #f4f4f5;
-  }
-}
-
-.zagreb-map.leaflet-container {
+.zagreb-map {
   font-family: inherit;
 }
 
