@@ -57,6 +57,13 @@ const hr = {
     mockEstimateNote: "Procjena zauzeća je ilustrativna.",
     missingApiKey:
       "Nedostaje NEXT_PUBLIC_GOOGLE_MAPS_API_KEY. Dodajte ključ u .env.local da biste prikazali kartu.",
+    searchLabel: "Odredište",
+    searchPlaceholder: "Upišite adresu ili mjesto (Google predlozi)",
+    searchAriaLabel: "Pretražite odredište",
+    nearestTitle: "Najbliže garaže",
+    nearestHint: "Odaberite mjesto iz predloga da vidite najbliže garaže i pomaknete kartu.",
+    distanceMeters: "m",
+    distanceKilometers: "km",
   },
   grid: {
     title: "Slobodna mjesta sada",
@@ -144,6 +151,13 @@ const en: Dictionary = {
     mockEstimateNote: "Availability is an illustrative estimate.",
     missingApiKey:
       "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is missing. Add your key to .env.local to show the map.",
+    searchLabel: "Destination",
+    searchPlaceholder: "Type an address or place (Google suggestions)",
+    searchAriaLabel: "Search for a destination",
+    nearestTitle: "Nearest garages",
+    nearestHint: "Pick a place from suggestions to see nearby garages and move the map.",
+    distanceMeters: "m",
+    distanceKilometers: "km",
   },
   grid: {
     title: "Spaces available now",

@@ -25,6 +25,13 @@ export function MapPlaceholder({ copy, locations }: Props) {
             capacityLabel={copy.capacityLabel}
             mockEstimateNote={copy.mockEstimateNote}
             missingApiKeyMessage={copy.missingApiKey}
+            searchLabel={copy.searchLabel}
+            searchPlaceholder={copy.searchPlaceholder}
+            searchAriaLabel={copy.searchAriaLabel}
+            nearestTitle={copy.nearestTitle}
+            nearestHint={copy.nearestHint}
+            distanceMeters={copy.distanceMeters}
+            distanceKilometers={copy.distanceKilometers}
           />
         </div>
       </div>
