@@ -24,6 +24,7 @@ export function MapPlaceholder({ copy, locations }: Props) {
             freeSpotsLabel={copy.freeInPopup}
             capacityLabel={copy.capacityLabel}
             mockEstimateNote={copy.mockEstimateNote}
+            missingApiKeyMessage={copy.missingApiKey}
           />
         </div>
       </div>

@@ -3,7 +3,7 @@
 
 __turbopack_context__.v((parentImport) => {
     return Promise.all([
-  "static/chunks/node_modules_0~hbm51._.js",
+  "static/chunks/node_modules_@react-google-maps_api_dist_esm_0nf5m~i.js",
   "static/chunks/_01l54~d._.js",
   "static/chunks/app_components_landing_ZagrebMap_tsx_07qnbf0._.js"
 ].map((chunk) => __turbopack_context__.l(chunk))).then(() => {

@@ -64,8 +64,8 @@ __turbopack_context__.s([
 ]);
 const hr = {
     metadata: {
-        title: "ParkSpot Zagreb — slobodna parkirna mjesta",
-        description: "Pregled slobodnih parkirnih mjesta u Zagrebu. Manje kruženja, brži dolazak na odredište."
+        title: "ParkSpot Zagreb â€” slobodna parkirna mjesta",
+        description: "Pregled slobodnih parkirnih mjesta u Zagrebu. Manje kruÅ¾enja, brÅ¾i dolazak na odrediÅ¡te."
     },
     header: {
         brand: "ParkSpot Zagreb",
@@ -76,10 +76,10 @@ const hr = {
         }
     },
     hero: {
-        kicker: "Zagreb · dostupnost u stvarnom vremenu",
-        title: "Pronađite slobodno parkirno mjesto prije nego stignete",
-        body: "Pregled slobodnih mjesta diljem Zagreba — manje kruženja, manje emisija, više vremena tamo gdje vam treba.",
-        ctaPrimary: "Pronađi parking",
+        kicker: "Zagreb Â· dostupnost u stvarnom vremenu",
+        title: "PronaÄ‘ite slobodno parkirno mjesto prije nego stignete",
+        body: "Pregled slobodnih mjesta diljem Zagreba â€” manje kruÅ¾enja, manje emisija, viÅ¡e vremena tamo gdje vam treba.",
+        ctaPrimary: "PronaÄ‘i parking",
         ctaMap: "Otvori kartu"
     },
     stats: [
@@ -89,81 +89,69 @@ const hr = {
         },
         {
             value: "17",
-            label: "Gradskih četvrti"
+            label: "Gradskih Äetvrti"
         },
         {
             value: "<5 s",
-            label: "Osvježavanje prikaza"
+            label: "OsvjeÅ¾avanje prikaza"
         }
     ],
     howItWorks: {
         title: "Kako radi",
-        subtitle: "Tri koraka od pretrage do mjesta — isti tijek može pokrenuti vaš backend kad spojite API.",
+        subtitle: "Tri koraka od pretrage do mjesta â€” isti tijek moÅ¾e pokrenuti vaÅ¡ backend kad spojite API.",
         steps: [
             {
-                title: "Odaberite područje",
-                body: "Pretražite ili odaberite zonu na karti Zagreba i vidite parkirališta s brojem slobodnih mjesta."
+                title: "Odaberite podruÄje",
+                body: "PretraÅ¾ite ili odaberite zonu na karti Zagreba i vidite parkiraliÅ¡ta s brojem slobodnih mjesta."
             },
             {
                 title: "Usporedite opcije",
-                body: "Udaljenost, cijena i broj slobodnih mjesta prilagođavaju se prometu u gradu."
+                body: "Udaljenost, cijena i broj slobodnih mjesta prilagoÄ‘avaju se prometu u gradu."
             },
             {
                 title: "Parkirajte s povjerenjem",
-                body: "Krenite prema lokaciji gdje još ima mjesta — bez nagađanja u gužvi."
+                body: "Krenite prema lokaciji gdje joÅ¡ ima mjesta â€” bez nagaÄ‘anja u guÅ¾vi."
             }
         ]
     },
     map: {
         title: "Karta Zagreba",
-        subtitle: "OpenStreetMap — označena su demo parkirališta u gradu.",
+        subtitle: "Google karta — javne garaže (Geoportal Grada Zagreba) s procjenom zauzeća (demo, ilustrativno).",
         loadingMap: "Učitavanje karte Zagreba…",
-        freeInPopup: "slobodno"
+        freeInPopup: "slobodno",
+        capacityLabel: "Kapacitet",
+        mockEstimateNote: "Procjena zauzeća je ilustrativna.",
+        missingApiKey: "Nedostaje NEXT_PUBLIC_GOOGLE_MAPS_API_KEY. Dodajte ključ u .env.local da biste prikazali kartu."
     },
     grid: {
         title: "Slobodna mjesta sada",
-        subtitle: "Demo podaci za Zagreb — kartice kasnije povežite na svoj API.",
+        subtitle: "Javne garaÅ¾e iz Geoportala â€” broj slobodnih mjesta je demo procjena; poveÅ¾ite kartice na API kad budete spremni.",
         freeLabel: "slobodno",
+        capacityLabel: "kapacitet",
+        mockEstimateNote: "Ilustrativna procjena.",
         badgeOpen: "Ima mjesta",
-        badgeLimited: "Ograničeno"
+        badgeLimited: "OgraniÄeno"
     },
     pricing: {
         title: "Cijene",
-        body: "Cijene po zonama i parkiralištima u Zagrebu razlikuju se. Ovdje kasnije povežite pravila naplate.",
-        footnote: "Rezervirano mjesto za tarife — planovi uskoro."
+        body: "Cijene po zonama i parkiraliÅ¡tima u Zagrebu razlikuju se. Ovdje kasnije poveÅ¾ite pravila naplate.",
+        footnote: "Rezervirano mjesto za tarife â€” planovi uskoro."
     },
     footer: {
-        copyright: "ParkSpot Zagreb. Demo sučelje — podaci su ilustrativni.",
+        copyright: "ParkSpot Zagreb. Demo suÄelje â€” podaci su ilustrativni.",
         privacy: "Privatnost",
         terms: "Uvjeti",
         contact: "Kontakt"
     },
-    parking: {
-        "1": {
-            name: "Garaža Glavni kolodvor",
-            pricePerHour: "2,00 € / h",
-            distanceLabel: "240 m"
-        },
-        "2": {
-            name: "Langov trg — otvoreno parkiralište",
-            pricePerHour: "1,50 € / h",
-            distanceLabel: "0,5 km"
-        },
-        "3": {
-            name: "Garaža Importanne / Green Gold",
-            pricePerHour: "2,50 € / h",
-            distanceLabel: "120 m"
-        },
-        "4": {
-            name: "Garaža Arena Zagreb",
-            pricePerHour: "Prvi sat besplatno",
-            distanceLabel: "1,2 km"
-        }
-    }
+    parkingDefaults: {
+        pricePerHour: "â€”",
+        distanceLabel: "â€”"
+    },
+    parking: {}
 };
 const en = {
     metadata: {
-        title: "ParkSpot Zagreb — free parking spaces",
+        title: "ParkSpot Zagreb â€” free parking spaces",
         description: "See available parking in Zagreb before you arrive. Less circling, faster trips to your destination."
     },
     header: {
@@ -175,9 +163,9 @@ const en = {
         }
     },
     hero: {
-        kicker: "Zagreb · live availability",
+        kicker: "Zagreb Â· live availability",
         title: "Find a free parking space before you arrive",
-        body: "Browse open spots across Zagreb — less circling, lower emissions, more time where you need to be.",
+        body: "Browse open spots across Zagreb â€” less circling, lower emissions, more time where you need to be.",
         ctaPrimary: "Find parking",
         ctaMap: "Open map"
     },
@@ -197,7 +185,7 @@ const en = {
     ],
     howItWorks: {
         title: "How it works",
-        subtitle: "Three steps from search to spot — your backend can power the same flow once you connect an API.",
+        subtitle: "Three steps from search to spot â€” your backend can power the same flow once you connect an API.",
         steps: [
             {
                 title: "Choose an area",
@@ -209,56 +197,44 @@ const en = {
             },
             {
                 title: "Park with confidence",
-                body: "Head to a location that still has room — no more guessing in busy areas."
+                body: "Head to a location that still has room â€” no more guessing in busy areas."
             }
         ]
     },
     map: {
         title: "Zagreb map",
-        subtitle: "OpenStreetMap — demo parking locations are marked in the city.",
+        subtitle: "Google Maps — public garages (City of Zagreb Geoportal) with illustrative occupancy estimates (demo).",
         loadingMap: "Loading Zagreb map…",
-        freeInPopup: "free"
+        freeInPopup: "free",
+        capacityLabel: "Capacity",
+        mockEstimateNote: "Availability is an illustrative estimate.",
+        missingApiKey: "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is missing. Add your key to .env.local to show the map."
     },
     grid: {
         title: "Spaces available now",
-        subtitle: "Demo data for Zagreb — wire these cards to your API when ready.",
+        subtitle: "Public garages from Geoportal â€” free-space counts are demo estimates; connect cards to your API when ready.",
         freeLabel: "free",
+        capacityLabel: "capacity",
+        mockEstimateNote: "Illustrative estimate.",
         badgeOpen: "Spaces available",
         badgeLimited: "Limited"
     },
     pricing: {
         title: "Pricing",
         body: "Rates vary by zone and car park in Zagreb. Connect your billing rules here when you build the product layer.",
-        footnote: "Placeholder for tariffs — plans coming soon."
+        footnote: "Placeholder for tariffs â€” plans coming soon."
     },
     footer: {
-        copyright: "ParkSpot Zagreb. Demo UI — data is illustrative.",
+        copyright: "ParkSpot Zagreb. Demo UI â€” data is illustrative.",
         privacy: "Privacy",
         terms: "Terms",
         contact: "Contact"
     },
-    parking: {
-        "1": {
-            name: "Main station garage",
-            pricePerHour: "€2.00 / h",
-            distanceLabel: "240 m"
-        },
-        "2": {
-            name: "Langov trg — surface parking",
-            pricePerHour: "€1.50 / h",
-            distanceLabel: "0.5 km"
-        },
-        "3": {
-            name: "Importanne / Green Gold garage",
-            pricePerHour: "€2.50 / h",
-            distanceLabel: "120 m"
-        },
-        "4": {
-            name: "Arena Zagreb garage",
-            pricePerHour: "First hour free",
-            distanceLabel: "1.2 km"
-        }
-    }
+    parkingDefaults: {
+        pricePerHour: "â€”",
+        distanceLabel: "â€”"
+    },
+    parking: {}
 };
 const byLocale = {
     hr,

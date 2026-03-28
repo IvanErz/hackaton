@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import dynamic from "next/dynamic";
@@ -10,6 +10,7 @@ type Props = {
   freeSpotsLabel: string;
   capacityLabel: string;
   mockEstimateNote: string;
+  missingApiKeyMessage: string;
 };
 
 export function ZagrebMapLoader({
@@ -18,6 +19,7 @@ export function ZagrebMapLoader({
   freeSpotsLabel,
   capacityLabel,
   mockEstimateNote,
+  missingApiKeyMessage,
 }: Props) {
   const ZagrebMapDynamic = useMemo(
     () =>
@@ -45,6 +47,7 @@ export function ZagrebMapLoader({
       freeSpotsLabel={freeSpotsLabel}
       capacityLabel={capacityLabel}
       mockEstimateNote={mockEstimateNote}
+      missingApiKeyMessage={missingApiKeyMessage}
     />
   );
 }

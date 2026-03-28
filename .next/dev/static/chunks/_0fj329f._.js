@@ -100,7 +100,7 @@ var _s = __turbopack_context__.k.signature();
 "use client";
 ;
 ;
-function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel }) {
+function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabel, mockEstimateNote, missingApiKeyMessage }) {
     _s();
     const ZagrebMapDynamic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "ZagrebMapLoader.useMemo[ZagrebMapDynamic]": ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])({
@@ -122,7 +122,7 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel }) {
                             children: loadingLabel
                         }, void 0, false, {
                             fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-                            lineNumber: 21,
+                            lineNumber: 31,
                             columnNumber: 13
                         }, this)
                 }["ZagrebMapLoader.useMemo[ZagrebMapDynamic]"]
@@ -132,11 +132,14 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel }) {
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ZagrebMapDynamic, {
         locations: locations,
-        freeSpotsLabel: freeSpotsLabel
+        freeSpotsLabel: freeSpotsLabel,
+        capacityLabel: capacityLabel,
+        mockEstimateNote: mockEstimateNote,
+        missingApiKeyMessage: missingApiKeyMessage
     }, void 0, false, {
         fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-        lineNumber: 34,
-        columnNumber: 10
+        lineNumber: 45,
+        columnNumber: 5
     }, this);
 }
 _s(ZagrebMapLoader, "ZXXOXB1Se+vApDC42Tls54M5Qzg=");
