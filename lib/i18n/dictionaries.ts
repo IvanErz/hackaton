@@ -12,6 +12,7 @@ const hr = {
       howItWorks: "Kako radi",
       freeSpaces: "Slobodna mjesta",
       pricing: "Cijene",
+      zoneCheck: "Koja je zona?",
     },
   },
   hero: {
@@ -91,6 +92,28 @@ const hr = {
     body: "Cijene po zonama i parkiralištima u Zagrebu razlikuju se. Ovdje kasnije povežite pravila naplate.",
     footnote: "Rezervirano mjesto za tarife — planovi uskoro.",
   },
+  zonePage: {
+    metadata: {
+      title: "ParkSpot Zagreb — koja je parkirna zona?",
+      description:
+        "Unesite adresu u Zagrebu i saznajte u koju parkirnu zonu (I–IV) spada lokacija — sučelje za povezivanje s backendom.",
+    },
+    title: "Provjera parkirne zone",
+    subtitle:
+      "Upišite adresu ili lokaciju u Zagrebu. Prikaz zone ovdje je predložak — podatke će dostaviti vaš backend nakon geokodiranja i pravila.",
+    addressLabel: "Adresa",
+    addressPlaceholder: "npr. Ilica 10, Zagreb",
+    submitButton: "Provjeri zonu",
+    submitLoading: "Provjera…",
+    resultTitle: "Rezultat",
+    resultEmpty: "Nakon potvrde ovdje će se prikazati parkirna zona za unesenu adresu.",
+    resultLoading: "Obrada unosa…",
+    zoneLabel: "Zona",
+    blockLabel: "Blok",
+    dash: "—",
+    backendNote: "Povezivanje s API-jem / geokodiranjem i pravilima zona uslijedi.",
+    validationEmpty: "Unesite adresu.",
+  },
   footer: {
     copyright: "ParkSpot Zagreb. Demo sučelje — podaci su ilustrativni.",
     privacy: "Privatnost",
@@ -126,6 +149,7 @@ const en: Dictionary = {
       howItWorks: "How it works",
       freeSpaces: "Free spaces",
       pricing: "Pricing",
+      zoneCheck: "Zone check",
     },
   },
   hero: {
@@ -203,6 +227,28 @@ const en: Dictionary = {
     title: "Pricing",
     body: "Rates vary by zone and car park in Zagreb. Connect your billing rules here when you build the product layer.",
     footnote: "Placeholder for tariffs — plans coming soon.",
+  },
+  zonePage: {
+    metadata: {
+      title: "ParkSpot Zagreb — which parking zone?",
+      description:
+        "Enter a Zagreb address to see which parking zone (I–IV) applies — UI ready for your backend.",
+    },
+    title: "Parking zone lookup",
+    subtitle:
+      "Type an address or place in Zagreb. The zone shown here is a layout placeholder until your backend resolves geocoding and tariff rules.",
+    addressLabel: "Address",
+    addressPlaceholder: "e.g. Ilica 10, Zagreb",
+    submitButton: "Check zone",
+    submitLoading: "Checking…",
+    resultTitle: "Result",
+    resultEmpty: "After you submit, the parking zone for your address will appear here.",
+    resultLoading: "Processing…",
+    zoneLabel: "Zone",
+    blockLabel: "Block",
+    dash: "—",
+    backendNote: "API / geocoding and zone rules hookup coming next.",
+    validationEmpty: "Please enter an address.",
   },
   footer: {
     copyright: "ParkSpot Zagreb. Demo UI — data is illustrative.",

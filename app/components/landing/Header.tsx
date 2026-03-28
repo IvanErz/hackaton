@@ -22,14 +22,17 @@ export function Header({ locale, copy }: Props) {
           <span className="hidden sm:inline">{copy.brand}</span>
         </Link>
         <div className="flex flex-1 items-center justify-end gap-4 sm:gap-6">
-          <nav className="flex items-center gap-4 text-sm font-medium text-zinc-600 dark:text-zinc-400 sm:gap-6">
-            <a href="#how-it-works" className="transition-colors hover:text-foreground">
+          <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 sm:gap-x-6">
+            <a href="/#how-it-works" className="transition-colors hover:text-foreground">
               {copy.nav.howItWorks}
             </a>
-            <a href="#spots" className="transition-colors hover:text-foreground">
+            <a href="/#spots" className="transition-colors hover:text-foreground">
               {copy.nav.freeSpaces}
             </a>
-            <a href="#pricing" className="transition-colors hover:text-foreground">
+            <Link href="/zona" className="transition-colors hover:text-foreground">
+              {copy.nav.zoneCheck}
+            </Link>
+            <a href="/#pricing" className="transition-colors hover:text-foreground">
               {copy.nav.pricing}
             </a>
           </nav>

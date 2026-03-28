@@ -75,8 +75,6 @@ export function DestinationSearchPanel({
   directionsToBestGarageLabel,
   parkingPriceLabels,
 }: Props) {
-  const autocompleteContainerRef = useRef<HTMLDivElement | null>(null);
-
   const nearestGarages = useMemo(
     () => nearestGaragesForDestination(locations, destination),
     [locations, destination]
@@ -86,67 +84,6 @@ export function DestinationSearchPanel({
     () => nearestEvForDestination(evStations, destination),
     [evStations, destination]
   );
-
-  useEffect(() => {
-    if (!scriptReady || !apiKey) return;
-    const container = autocompleteContainerRef.current;
-    if (!container) return;
-
-    let cancelled = false;
-    const elRef: { current: google.maps.places.PlaceAutocompleteElement | null } = { current: null };
-
-    const onGmpSelect = async (ev: Event) => {
-      const { placePrediction } = ev as GmpSelectEvent;
-      if (!placePrediction) return;
-      const place = placePrediction.toPlace();
-      await place.fetchFields({ fields: ["location", "displayName"] });
-      if (cancelled) return;
-      const coords = latLngFromPlaceLocation(place.location);
-      if (!coords) return;
-      onDestinationSelected(coords);
-    };
-
-    void (async () => {
-      try {
-        await google.maps.importLibrary("places");
-      } catch (e) {
-        console.error("Google Maps Places library failed to load", e);
-        return;
-      }
-      if (cancelled || !container) return;
-
-      const Ctor = google.maps.places.PlaceAutocompleteElement;
-      if (!Ctor) {
-        console.error("PlaceAutocompleteElement is not available");
-        return;
-      }
-
-      container.replaceChildren();
-      const el = new Ctor({}) as PlaceAutocompleteWidget;
-      el.includedRegionCodes = ["hr"];
-      el.locationBias = {
-        center: { lat: ZAGREB_CENTER[0], lng: ZAGREB_CENTER[1] },
-        radius: 45000,
-      };
-      el.id = "zagreb-destination-search";
-      el.placeholder = searchPlaceholder;
-      el.setAttribute("aria-label", searchAriaLabel);
-      if (cancelled || !container) return;
-      el.addEventListener("gmp-select", onGmpSelect as EventListener);
-      container.appendChild(el);
-      elRef.current = el;
-    })();
-
-    return () => {
-      cancelled = true;
-      if (elRef.current) {
-        elRef.current.removeEventListener("gmp-select", onGmpSelect as EventListener);
-        elRef.current.remove();
-        elRef.current = null;
-      }
-      container.replaceChildren();
-    };
-  }, [scriptReady, apiKey, searchPlaceholder, searchAriaLabel, onDestinationSelected]);
 
   const showHint = !destination;
   const topForRoutes = useMemo(
@@ -164,9 +101,13 @@ export function DestinationSearchPanel({
         >
           {searchLabel}
         </label>
-        <div
-          ref={autocompleteContainerRef}
-          className="zagreb-place-autocomplete-host rounded-xl border border-zinc-200 bg-white px-1 py-0.5 shadow-sm transition-[box-shadow] focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-500/20 dark:border-zinc-700 dark:bg-zinc-950 dark:focus-within:border-emerald-500"
+        <ZagrebPlaceAutocomplete
+          scriptReady={scriptReady}
+          apiKey={apiKey}
+          elementId="zagreb-destination-search"
+          placeholder={searchPlaceholder}
+          ariaLabel={searchAriaLabel}
+          onPlaceSelected={(coords) => onDestinationSelected(coords)}
         />
         <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{searchHelper}</p>
         {destination && topForRoutes.length > 0 ? (
