@@ -5,6 +5,7 @@ import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import { ZAGREB_CENTER } from "@/lib/mock-parking-spaces";
 import {
   formatDistance,
+  googleMapsDirectionsFromCurrentLocationUrl,
   type GmpSelectEvent,
   latLngFromPlaceLocation,
   nearestEvForDestination,
@@ -36,6 +37,10 @@ type Props = {
   evUnknownConnectors: string;
   evUnknownType: string;
   showEvCharging: boolean;
+  directionsFromHereLabel: string;
+  bestParkingTitle: string;
+  fromDestinationLabel: string;
+  directionsToBestGarageLabel: string;
 };
 
 export function DestinationSearchPanel({
@@ -61,6 +66,10 @@ export function DestinationSearchPanel({
   evUnknownConnectors,
   evUnknownType,
   showEvCharging,
+  directionsFromHereLabel,
+  bestParkingTitle,
+  fromDestinationLabel,
+  directionsToBestGarageLabel,
 }: Props) {
   const autocompleteContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -136,6 +145,7 @@ export function DestinationSearchPanel({
   }, [scriptReady, apiKey, searchPlaceholder, searchAriaLabel, onDestinationSelected]);
 
   const showHint = !destination;
+  const bestParking = nearestGarages[0];
 
   return (
     <div className="space-y-3">
@@ -152,6 +162,37 @@ export function DestinationSearchPanel({
           className="zagreb-place-autocomplete-host rounded-xl border border-zinc-200 bg-white px-1 py-0.5 shadow-sm transition-[box-shadow] focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-500/20 dark:border-zinc-700 dark:bg-zinc-950 dark:focus-within:border-emerald-500"
         />
         <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{searchHelper}</p>
+        {destination && bestParking ? (
+          <div className="mt-3 rounded-xl border border-emerald-200/80 bg-emerald-50/50 p-3 dark:border-emerald-800/60 dark:bg-emerald-950/30">
+            <p className="text-xs font-medium text-emerald-900 dark:text-emerald-200">{bestParkingTitle}</p>
+            <p className="mt-1 text-sm font-semibold text-foreground">{bestParking.loc.name}</p>
+            <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-400">
+              {formatDistance(bestParking.d, distanceMeters, distanceKilometers)} {fromDestinationLabel}
+            </p>
+            <a
+              href={googleMapsDirectionsFromCurrentLocationUrl({
+                lat: bestParking.loc.lat,
+                lng: bestParking.loc.lng,
+              })}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex min-h-10 items-center rounded-lg text-sm font-medium text-emerald-600 underline decoration-emerald-600/40 underline-offset-2 transition hover:text-emerald-700 hover:decoration-emerald-600 dark:text-emerald-400 dark:decoration-emerald-400/50 dark:hover:text-emerald-300"
+            >
+              {directionsToBestGarageLabel}
+            </a>
+          </div>
+        ) : destination ? (
+          <p className="mt-2">
+            <a
+              href={googleMapsDirectionsFromCurrentLocationUrl(destination)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-10 items-center rounded-lg text-sm font-medium text-emerald-600 underline decoration-emerald-600/40 underline-offset-2 transition hover:text-emerald-700 hover:decoration-emerald-600 dark:text-emerald-400 dark:decoration-emerald-400/50 dark:hover:text-emerald-300"
+            >
+              {directionsFromHereLabel}
+            </a>
+          </p>
+        ) : null}
       </fieldset>
 
       {nearestGarages.length > 0 ? (

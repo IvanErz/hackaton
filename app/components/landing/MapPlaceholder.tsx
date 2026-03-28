@@ -44,6 +44,10 @@ export function MapPlaceholder({ copy, parkingPriceLabels, locations, evStations
             evUnknownConnectors={copy.evUnknownConnectors}
             evUnknownType={copy.evUnknownType}
             showEvChargingLabel={copy.showEvChargingLabel}
+            directionsFromHereLabel={copy.directionsFromHereLabel}
+            bestParkingTitle={copy.bestParkingTitle}
+            fromDestinationLabel={copy.fromDestinationLabel}
+            directionsToBestGarageLabel={copy.directionsToBestGarageLabel}
           />
         </div>
       </div>

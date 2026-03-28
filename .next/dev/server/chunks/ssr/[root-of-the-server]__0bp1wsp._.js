@@ -135,7 +135,11 @@ const hr = {
         evTypeLabel: "Tip",
         evUnknownConnectors: "Nepoznato",
         evUnknownType: "Nepoznato",
-        showEvChargingLabel: "Prikaz punionica za električna vozila na karti"
+        showEvChargingLabel: "Prikaz punionica za električna vozila na karti",
+        directionsFromHereLabel: "Otvori upute u Google Kartama (od vaše lokacije)",
+        bestParkingTitle: "Najbliža garaža vašem odredištu",
+        fromDestinationLabel: "od odredišta",
+        directionsToBestGarageLabel: "Upute do ove garaže (od vaše lokacije)"
     },
     grid: {
         title: "Slobodna mjesta sada",
@@ -240,7 +244,11 @@ const en = {
         evTypeLabel: "Type",
         evUnknownConnectors: "Unknown",
         evUnknownType: "Unknown",
-        showEvChargingLabel: "Show EV charging stations on the map"
+        showEvChargingLabel: "Show EV charging stations on the map",
+        directionsFromHereLabel: "Open directions in Google Maps (from your location)",
+        bestParkingTitle: "Closest garage to your destination",
+        fromDestinationLabel: "from destination",
+        directionsToBestGarageLabel: "Directions to this garage (from your location)"
     },
     grid: {
         title: "Spaces available now",

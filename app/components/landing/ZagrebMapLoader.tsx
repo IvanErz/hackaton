@@ -28,10 +28,17 @@ type Props = {
   evUnknownConnectors: string;
   evUnknownType: string;
   showEvChargingLabel: string;
+  directionsFromHereLabel: string;
+  bestParkingTitle: string;
+  fromDestinationLabel: string;
+  directionsToBestGarageLabel: string;
 };
 
 export function ZagrebMapLoader({
+  bestParkingTitle,
   locations,
+  fromDestinationLabel ,
+  directionsToBestGarageLabel ,
   evStations,
   parkingPriceLabels,
   loadingLabel,
@@ -53,6 +60,7 @@ export function ZagrebMapLoader({
   evUnknownConnectors,
   evUnknownType,
   showEvChargingLabel,
+  directionsFromHereLabel,
 }: Props) {
   const ZagrebMapDynamic = useMemo(
     () =>
@@ -105,6 +113,10 @@ export function ZagrebMapLoader({
       evUnknownConnectors={evUnknownConnectors}
       evUnknownType={evUnknownType}
       showEvChargingLabel={showEvChargingLabel}
+      directionsFromHereLabel={directionsFromHereLabel}
+      bestParkingTitle={bestParkingTitle}
+      fromDestinationLabel={fromDestinationLabel}
+      directionsToBestGarageLabel={directionsToBestGarageLabel}
     />
   );
 }

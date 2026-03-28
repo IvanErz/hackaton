@@ -34,6 +34,15 @@ export function latLngFromPlaceLocation(
   return { lat: literal.lat, lng: literal.lng };
 }
 
+/** Opens Google Maps directions; omitting origin uses the user's current location. */
+export function googleMapsDirectionsFromCurrentLocationUrl(dest: { lat: number; lng: number }): string {
+  const params = new URLSearchParams({
+    api: "1",
+    destination: `${dest.lat},${dest.lng}`,
+  });
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
+}
+
 /** gmp-select event shape (Place Autocomplete widget); not fully modeled in @types/google.maps. */
 export type GmpSelectEvent = Event & {
   placePrediction: { toPlace: () => google.maps.places.Place };

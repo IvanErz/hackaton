@@ -7,6 +7,7 @@ import { LoadScript } from "@react-google-maps/api";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DestinationSearchPanel } from "./DestinationSearchPanel";
 import { mapContainerClassName, ZagrebMapCanvas } from "./ZagrebMapCanvas";
+import { nearestGaragesForDestination } from "./zagreb-map-shared";
 
 const MAP_SCRIPT_LIBRARIES = [] as const satisfies Libraries;
 
@@ -32,6 +33,10 @@ type Props = {
   evUnknownConnectors: string;
   evUnknownType: string;
   showEvChargingLabel: string;
+  directionsFromHereLabel: string;
+  bestParkingTitle: string;
+  fromDestinationLabel: string;
+  directionsToBestGarageLabel: string;
 };
 
 export function ZagrebMapSection({
@@ -56,6 +61,10 @@ export function ZagrebMapSection({
   evUnknownConnectors,
   evUnknownType,
   showEvChargingLabel,
+  directionsFromHereLabel,
+  bestParkingTitle,
+  fromDestinationLabel,
+  directionsToBestGarageLabel,
 }: Props) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -68,21 +77,23 @@ export function ZagrebMapSection({
 
   destinationRef.current = destination;
 
-  const onMapReady = useCallback((map: google.maps.Map) => {
-    mapRef.current = map;
-    const d = destinationRef.current;
-    if (d) {
-      map.panTo(d);
-      map.setZoom(15);
-    }
-  }, []);
-
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !destination) return;
-    map.panTo(destination);
-    map.setZoom(15);
-  }, [destination]);
+  const onMapReady = useCallback(
+    (map: google.maps.Map) => {
+      mapRef.current = map;
+      const d = destinationRef.current;
+      if (!d) return;
+      const nearest = nearestGaragesForDestination(locations, d);
+      if (nearest.length > 0) {
+        const loc = nearest[0].loc;
+        map.panTo({ lat: loc.lat, lng: loc.lng });
+        map.setZoom(16);
+      } else {
+        map.panTo(d);
+        map.setZoom(15);
+      }
+    },
+    [locations]
+  );
 
   const handleDestinationSelected = useCallback((coords: { lat: number; lng: number }) => {
     setDestination(coords);
@@ -102,6 +113,22 @@ export function ZagrebMapSection({
       }
     }
   }, []);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !destination) return;
+    if (nearestGaragesForDestination(locations, destination).length > 0) return;
+    map.panTo(destination);
+    map.setZoom(15);
+  }, [destination, locations]);
+
+  useEffect(() => {
+    if (!destination) return;
+    const nearest = nearestGaragesForDestination(locations, destination);
+    const first = nearest[0];
+    if (!first) return;
+    focusGarage(first.loc);
+  }, [destination, locations, focusGarage]);
 
   const focusEvStation = useCallback((station: EvChargingStation) => {
     setSelectedId(null);
@@ -159,6 +186,10 @@ export function ZagrebMapSection({
             evTypeLabel={evTypeLabel}
             evUnknownConnectors={evUnknownConnectors}
             evUnknownType={evUnknownType}
+            directionsFromHereLabel={directionsFromHereLabel}
+            bestParkingTitle={bestParkingTitle}
+            fromDestinationLabel={fromDestinationLabel}
+            directionsToBestGarageLabel={directionsToBestGarageLabel}
           />
         </div>
 
