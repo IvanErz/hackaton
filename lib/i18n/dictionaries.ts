@@ -49,14 +49,20 @@ const hr = {
   },
   map: {
     title: "Karta Zagreba",
-    subtitle: "OpenStreetMap — označena su demo parkirališta u gradu.",
+    subtitle:
+      "OpenStreetMap — javne garaže (Geoportal Grada Zagreba) s procjenom zauzeća (demo, ilustrativno).",
     loadingMap: "Učitavanje karte Zagreba…",
     freeInPopup: "slobodno",
+    capacityLabel: "Kapacitet",
+    mockEstimateNote: "Procjena zauzeća je ilustrativna.",
   },
   grid: {
     title: "Slobodna mjesta sada",
-    subtitle: "Demo podaci za Zagreb — kartice kasnije povežite na svoj API.",
+    subtitle:
+      "Javne garaže iz Geoportala — broj slobodnih mjesta je demo procjena; povežite kartice na API kad budete spremni.",
     freeLabel: "slobodno",
+    capacityLabel: "kapacitet",
+    mockEstimateNote: "Ilustrativna procjena.",
     badgeOpen: "Ima mjesta",
     badgeLimited: "Ograničeno",
   },
@@ -71,28 +77,11 @@ const hr = {
     terms: "Uvjeti",
     contact: "Kontakt",
   },
-  parking: {
-    "1": {
-      name: "Garaža Glavni kolodvor",
-      pricePerHour: "2,00 € / h",
-      distanceLabel: "240 m",
-    },
-    "2": {
-      name: "Langov trg — otvoreno parkiralište",
-      pricePerHour: "1,50 € / h",
-      distanceLabel: "0,5 km",
-    },
-    "3": {
-      name: "Garaža Importanne / Green Gold",
-      pricePerHour: "2,50 € / h",
-      distanceLabel: "120 m",
-    },
-    "4": {
-      name: "Garaža Arena Zagreb",
-      pricePerHour: "Prvi sat besplatno",
-      distanceLabel: "1,2 km",
-    },
+  parkingDefaults: {
+    pricePerHour: "—",
+    distanceLabel: "—",
   },
+  parking: {},
 };
 
 export type Dictionary = typeof hr;
@@ -145,14 +134,20 @@ const en: Dictionary = {
   },
   map: {
     title: "Zagreb map",
-    subtitle: "OpenStreetMap — demo parking locations are marked in the city.",
+    subtitle:
+      "OpenStreetMap — public garages (City of Zagreb Geoportal) with illustrative occupancy estimates (demo).",
     loadingMap: "Loading Zagreb map…",
     freeInPopup: "free",
+    capacityLabel: "Capacity",
+    mockEstimateNote: "Availability is an illustrative estimate.",
   },
   grid: {
     title: "Spaces available now",
-    subtitle: "Demo data for Zagreb — wire these cards to your API when ready.",
+    subtitle:
+      "Public garages from Geoportal — free-space counts are demo estimates; connect cards to your API when ready.",
     freeLabel: "free",
+    capacityLabel: "capacity",
+    mockEstimateNote: "Illustrative estimate.",
     badgeOpen: "Spaces available",
     badgeLimited: "Limited",
   },
@@ -167,28 +162,11 @@ const en: Dictionary = {
     terms: "Terms",
     contact: "Contact",
   },
-  parking: {
-    "1": {
-      name: "Main station garage",
-      pricePerHour: "€2.00 / h",
-      distanceLabel: "240 m",
-    },
-    "2": {
-      name: "Langov trg — surface parking",
-      pricePerHour: "€1.50 / h",
-      distanceLabel: "0.5 km",
-    },
-    "3": {
-      name: "Importanne / Green Gold garage",
-      pricePerHour: "€2.50 / h",
-      distanceLabel: "120 m",
-    },
-    "4": {
-      name: "Arena Zagreb garage",
-      pricePerHour: "First hour free",
-      distanceLabel: "1.2 km",
-    },
+  parkingDefaults: {
+    pricePerHour: "—",
+    distanceLabel: "—",
   },
+  parking: {},
 };
 
 const byLocale: Record<Locale, Dictionary> = {
