@@ -1,11 +1,13 @@
 "use client";
 
+import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import { ZAGREB_CENTER } from "@/lib/mock-parking-spaces";
 import {
   formatDistance,
   type GmpSelectEvent,
   latLngFromPlaceLocation,
+  nearestEvForDestination,
   nearestGaragesForDestination,
   type PlaceAutocompleteWidget,
 } from "./zagreb-map-shared";
@@ -15,40 +17,61 @@ type Props = {
   scriptReady: boolean;
   apiKey: string;
   locations: ParkingLocation[];
+  evStations: EvChargingStation[];
   destination: { lat: number; lng: number } | null;
   onDestinationSelected: (coords: { lat: number; lng: number }) => void;
   onFocusGarage: (loc: ParkingLocation) => void;
+  onFocusEvStation: (station: EvChargingStation) => void;
   searchLabel: string;
   searchPlaceholder: string;
   searchAriaLabel: string;
   searchHelper: string;
   nearestTitle: string;
+  nearestEvTitle: string;
   nearestHint: string;
   distanceMeters: string;
   distanceKilometers: string;
+  evConnectorsLabel: string;
+  evTypeLabel: string;
+  evUnknownConnectors: string;
+  evUnknownType: string;
+  showEvCharging: boolean;
 };
 
 export function DestinationSearchPanel({
   scriptReady,
   apiKey,
   locations,
+  evStations,
   destination,
   onDestinationSelected,
   onFocusGarage,
+  onFocusEvStation,
   searchLabel,
   searchPlaceholder,
   searchAriaLabel,
   searchHelper,
   nearestTitle,
+  nearestEvTitle,
   nearestHint,
   distanceMeters,
   distanceKilometers,
+  evConnectorsLabel,
+  evTypeLabel,
+  evUnknownConnectors,
+  evUnknownType,
+  showEvCharging,
 }: Props) {
   const autocompleteContainerRef = useRef<HTMLDivElement | null>(null);
 
   const nearestGarages = useMemo(
     () => nearestGaragesForDestination(locations, destination),
     [locations, destination]
+  );
+
+  const nearestEv = useMemo(
+    () => nearestEvForDestination(evStations, destination),
+    [evStations, destination]
   );
 
   useEffect(() => {
@@ -112,6 +135,8 @@ export function DestinationSearchPanel({
     };
   }, [scriptReady, apiKey, searchPlaceholder, searchAriaLabel, onDestinationSelected]);
 
+  const showHint = !destination;
+
   return (
     <div className="space-y-3">
       <fieldset className="min-w-0">
@@ -149,7 +174,41 @@ export function DestinationSearchPanel({
             ))}
           </ul>
         </div>
-      ) : !destination ? (
+      ) : null}
+
+      {showEvCharging && nearestEv.length > 0 ? (
+        <div>
+          <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{nearestEvTitle}</p>
+          <ul className="mt-2 flex max-h-40 flex-col gap-1 overflow-y-auto sm:max-h-48">
+            {nearestEv.map(({ station, d }) => {
+              const countPart =
+                station.connectorCount != null ? String(station.connectorCount) : evUnknownConnectors;
+              const typePart =
+                station.connectorType?.trim() ? station.connectorType : evUnknownType;
+              const subtitle = `${evConnectorsLabel}: ${countPart} · ${evTypeLabel}: ${typePart}`;
+              return (
+                <li key={station.id}>
+                  <button
+                    type="button"
+                    onClick={() => onFocusEvStation(station)}
+                    className="flex min-h-11 w-full flex-col items-stretch gap-0.5 rounded-xl border border-transparent px-3 py-2 text-left text-base text-foreground transition hover:border-zinc-200 hover:bg-zinc-50 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/80 sm:text-sm"
+                  >
+                    <span className="flex min-w-0 items-center justify-between gap-2">
+                      <span className="min-w-0 truncate font-medium">{station.name}</span>
+                      <span className="shrink-0 tabular-nums text-xs text-zinc-500">
+                        {formatDistance(d, distanceMeters, distanceKilometers)}
+                      </span>
+                    </span>
+                    <span className="truncate text-xs text-zinc-500">{subtitle}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
+
+      {showHint && nearestGarages.length === 0 && (!showEvCharging || nearestEv.length === 0) ? (
         <p className="text-xs text-zinc-500 dark:text-zinc-500">{nearestHint}</p>
       ) : null}
     </div>

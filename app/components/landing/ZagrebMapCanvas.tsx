@@ -1,5 +1,6 @@
 "use client";
 
+import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import { ZAGREB_CENTER, type ParkingLocation } from "@/lib/mock-parking-spaces";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useCallback, useEffect, useRef } from "react";
@@ -19,43 +20,77 @@ const destinationIcon: google.maps.Icon = {
   url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
 };
 
+const evChargingIcon: google.maps.Icon = {
+  url: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+};
+
+const garageIcon: google.maps.Icon = {
+  url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+};
+
 type Props = {
   locations: ParkingLocation[];
+  evStations: EvChargingStation[];
+  showEvCharging: boolean;
   destination: { lat: number; lng: number } | null;
   selectedId: string | null;
   setSelectedId: (id: string | null) => void;
+  selectedEvId: string | null;
+  setSelectedEvId: (id: string | null) => void;
   onMapReady: (map: google.maps.Map) => void;
   freeSpotsLabel: string;
   capacityLabel: string;
   mockEstimateNote: string;
+  evConnectorsLabel: string;
+  evTypeLabel: string;
+  evUnknownConnectors: string;
+  evUnknownType: string;
 };
 
 export function ZagrebMapCanvas({
   locations,
+  evStations,
+  showEvCharging,
   destination,
   selectedId,
   setSelectedId,
+  selectedEvId,
+  setSelectedEvId,
   onMapReady,
   freeSpotsLabel,
   capacityLabel,
   mockEstimateNote,
+  evConnectorsLabel,
+  evTypeLabel,
+  evUnknownConnectors,
+  evUnknownType,
 }: Props) {
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
 
-  const fitBounds = useCallback((map: google.maps.Map) => {
-    if (locations.length === 0) return;
-    const bounds = new google.maps.LatLngBounds();
-    for (const l of locations) {
-      bounds.extend({ lat: l.lat, lng: l.lng });
-    }
-    map.fitBounds(bounds, 32);
-    google.maps.event.addListenerOnce(map, "idle", () => {
-      const z = map.getZoom();
-      if (z !== undefined && z > 14) {
-        map.setZoom(14);
+  const fitBounds = useCallback(
+    (map: google.maps.Map) => {
+      const hasGarages = locations.length > 0;
+      const hasEv = showEvCharging && evStations.length > 0;
+      if (!hasGarages && !hasEv) return;
+      const bounds = new google.maps.LatLngBounds();
+      for (const l of locations) {
+        bounds.extend({ lat: l.lat, lng: l.lng });
       }
-    });
-  }, [locations]);
+      if (showEvCharging) {
+        for (const st of evStations) {
+          bounds.extend({ lat: st.lat, lng: st.lng });
+        }
+      }
+      map.fitBounds(bounds, 32);
+      google.maps.event.addListenerOnce(map, "idle", () => {
+        const z = map.getZoom();
+        if (z !== undefined && z > 14) {
+          map.setZoom(14);
+        }
+      });
+    },
+    [locations, evStations, showEvCharging]
+  );
 
   const onMapLoad = useCallback(
     (map: google.maps.Map) => {
@@ -71,9 +106,14 @@ export function ZagrebMapCanvas({
     const map = mapInstanceRef.current;
     if (!map) return;
     fitBounds(map);
-  }, [fitBounds, locations, destination]);
+  }, [fitBounds, locations, evStations, destination]);
 
   const selected = selectedId ? locations.find((l) => l.id === selectedId) : undefined;
+  const selectedEv = selectedEvId ? evStations.find((s) => s.id === selectedEvId) : undefined;
+
+  const connectorCountLabel =
+    selectedEv?.connectorCount != null ? String(selectedEv.connectorCount) : evUnknownConnectors;
+  const connectorTypeLabel = selectedEv?.connectorType?.trim() ? selectedEv.connectorType : evUnknownType;
 
   return (
     <GoogleMap
@@ -87,33 +127,83 @@ export function ZagrebMapCanvas({
         <Marker
           key={loc.id}
           position={{ lat: loc.lat, lng: loc.lng }}
-          onClick={() => setSelectedId(loc.id === selectedId ? null : loc.id)}
+          icon={garageIcon}
+          zIndex={loc.id === selectedId ? 50 : 1}
+          onClick={() => {
+            setSelectedEvId(null);
+            setSelectedId(loc.id === selectedId ? null : loc.id);
+          }}
         />
       ))}
+      {showEvCharging
+        ? evStations.map((s) => (
+        <Marker
+          key={s.id}
+          position={{ lat: s.lat, lng: s.lng }}
+          icon={evChargingIcon}
+          onClick={() => {
+            setSelectedId(null);
+            setSelectedEvId(s.id === selectedEvId ? null : s.id);
+          }}
+        />
+        ))
+        : null}
       {destination ? <Marker position={destination} icon={destinationIcon} zIndex={1000} /> : null}
       {selected ? (
         <InfoWindow
           position={{ lat: selected.lat, lng: selected.lng }}
           onCloseClick={() => setSelectedId(null)}
         >
-          <div className="max-w-[220px] text-sm text-zinc-900">
-            <p className="font-semibold">{selected.name}</p>
-            <p className="mt-1 text-zinc-600">{selected.address}</p>
-            <p className="mt-2">
-              {selected.freeCount} {freeSpotsLabel}
-              {selected.capacity != null ? (
-                <>
-                  {" "}
-                  · {capacityLabel}: {selected.capacity}
-                </>
-              ) : null}
-            </p>
-            <p className="mt-1 text-xs text-zinc-500">{mockEstimateNote}</p>
-            {selected.pricePerHour !== "—" || selected.distanceLabel !== "—" ? (
-              <p className="mt-2 text-zinc-600">
-                {selected.pricePerHour} · {selected.distanceLabel}
+          <div className="min-w-[240px] max-w-[280px] overflow-hidden rounded-lg border border-emerald-200/90 bg-white text-sm text-zinc-900 shadow-sm dark:border-emerald-800/60 dark:bg-zinc-950">
+            <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-3 py-2.5">
+              <p className="font-semibold leading-snug text-white">{selected.name}</p>
+            </div>
+            <div className="space-y-2.5 px-3 py-3">
+              <p className="leading-relaxed text-zinc-600 dark:text-zinc-300">{selected.address}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-200">
+                  {selected.freeCount} {freeSpotsLabel}
+                </span>
+                {selected.capacity != null ? (
+                  <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                    {capacityLabel}: {selected.capacity}
+                  </span>
+                ) : null}
+              </div>
+              <p className="border-t border-zinc-100 pt-2 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
+                {mockEstimateNote}
               </p>
-            ) : null}
+              {selected.pricePerHour !== "—" || selected.distanceLabel !== "—" ? (
+                <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                  {selected.pricePerHour} · {selected.distanceLabel}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        </InfoWindow>
+      ) : null}
+      {showEvCharging && selectedEv ? (
+        <InfoWindow
+          position={{ lat: selectedEv.lat, lng: selectedEv.lng }}
+          onCloseClick={() => setSelectedEvId(null)}
+        >
+          <div className="min-w-[220px] max-w-[260px] overflow-hidden rounded-lg border border-amber-200/90 bg-white text-sm text-zinc-900 shadow-sm dark:border-amber-800/50 dark:bg-zinc-950">
+            <div className="bg-gradient-to-r from-amber-500 to-amber-400 px-3 py-2.5">
+              <p className="font-semibold leading-snug text-amber-950">{selectedEv.name}</p>
+            </div>
+            <div className="space-y-2 px-3 py-3">
+              <p className="leading-relaxed text-zinc-600 dark:text-zinc-300">{selectedEv.address}</p>
+              <dl className="grid gap-1.5 text-xs">
+                <div className="flex justify-between gap-3">
+                  <dt className="text-zinc-500 dark:text-zinc-400">{evConnectorsLabel}</dt>
+                  <dd className="font-medium text-zinc-800 dark:text-zinc-200">{connectorCountLabel}</dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="text-zinc-500 dark:text-zinc-400">{evTypeLabel}</dt>
+                  <dd className="font-medium text-zinc-800 dark:text-zinc-200">{connectorTypeLabel}</dd>
+                </div>
+              </dl>
+            </div>
           </div>
         </InfoWindow>
       ) : null}

@@ -1,3 +1,4 @@
+import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 
 export const NEAREST_COUNT = 5;
@@ -54,6 +55,20 @@ export function nearestGaragesForDestination(
     .map((loc) => ({
       loc,
       d: haversineMeters(destination.lat, destination.lng, loc.lat, loc.lng),
+    }))
+    .sort((a, b) => a.d - b.d)
+    .slice(0, NEAREST_COUNT);
+}
+
+export function nearestEvForDestination(
+  stations: EvChargingStation[],
+  destination: { lat: number; lng: number } | null
+): { station: EvChargingStation; d: number }[] {
+  if (!destination) return [];
+  return [...stations]
+    .map((station) => ({
+      station,
+      d: haversineMeters(destination.lat, destination.lng, station.lat, station.lng),
     }))
     .sort((a, b) => a.d - b.d)
     .slice(0, NEAREST_COUNT);

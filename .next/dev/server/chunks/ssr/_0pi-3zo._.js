@@ -83,7 +83,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 ;
-function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabel, mockEstimateNote, missingApiKeyMessage, searchLabel, searchPlaceholder, searchAriaLabel, searchHelper, nearestTitle, nearestHint, distanceMeters, distanceKilometers }) {
+function ZagrebMapLoader({ locations, evStations, loadingLabel, freeSpotsLabel, capacityLabel, mockEstimateNote, missingApiKeyMessage, searchLabel, searchPlaceholder, searchAriaLabel, searchHelper, nearestTitle, nearestEvTitle, nearestHint, distanceMeters, distanceKilometers, evConnectorsLabel, evTypeLabel, evUnknownConnectors, evUnknownType, showEvChargingLabel }) {
     const ZagrebMapDynamic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])(async ()=>{}, {
             loadableGenerated: {
                 modules: [
@@ -101,7 +101,7 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabe
                             children: loadingLabel
                         }, void 0, false, {
                             fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-                            lineNumber: 52,
+                            lineNumber: 67,
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -109,7 +109,7 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabe
                             "aria-hidden": true
                         }, void 0, false, {
                             fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-                            lineNumber: 53,
+                            lineNumber: 68,
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -117,13 +117,13 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabe
                             "aria-hidden": true
                         }, void 0, false, {
                             fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-                            lineNumber: 57,
+                            lineNumber: 72,
                             columnNumber: 15
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-                    lineNumber: 47,
+                    lineNumber: 62,
                     columnNumber: 13
                 }, this)
         }), [
@@ -131,6 +131,7 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabe
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ZagrebMapDynamic, {
         locations: locations,
+        evStations: evStations,
         freeSpotsLabel: freeSpotsLabel,
         capacityLabel: capacityLabel,
         mockEstimateNote: mockEstimateNote,
@@ -140,12 +141,18 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabe
         searchAriaLabel: searchAriaLabel,
         searchHelper: searchHelper,
         nearestTitle: nearestTitle,
+        nearestEvTitle: nearestEvTitle,
         nearestHint: nearestHint,
         distanceMeters: distanceMeters,
-        distanceKilometers: distanceKilometers
+        distanceKilometers: distanceKilometers,
+        evConnectorsLabel: evConnectorsLabel,
+        evTypeLabel: evTypeLabel,
+        evUnknownConnectors: evUnknownConnectors,
+        evUnknownType: evUnknownType,
+        showEvChargingLabel: showEvChargingLabel
     }, void 0, false, {
         fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-        lineNumber: 69,
+        lineNumber: 84,
         columnNumber: 5
     }, this);
 }

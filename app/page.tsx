@@ -9,12 +9,14 @@ import { StatsRow } from "./components/landing/StatsRow";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { mergeParkingForLocale } from "@/lib/i18n/merge-parking";
+import { loadEvChargingStations } from "@/lib/ev-charging-stations";
 import { loadJavneGaraze } from "@/lib/javne-garaze";
 
 export default async function Home() {
   const locale = await getLocale();
   const dict = getDictionary(locale);
   const locations = mergeParkingForLocale(loadJavneGaraze(), dict);
+  const evStations = loadEvChargingStations();
 
   return (
     <div className="flex min-h-full flex-col">
@@ -22,7 +24,7 @@ export default async function Home() {
       <Hero copy={dict.hero} />
       <StatsRow stats={dict.stats} />
       <HowItWorks copy={dict.howItWorks} />
-      <MapPlaceholder copy={dict.map} locations={locations} />
+      <MapPlaceholder copy={dict.map} locations={locations} evStations={evStations} />
       <FreeSpacesGrid grid={dict.grid} locations={locations} />
       <PricingPlaceholder copy={dict.pricing} />
       <Footer copy={dict.footer} />

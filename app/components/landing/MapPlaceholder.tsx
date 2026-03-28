@@ -1,3 +1,4 @@
+import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { ZagrebMapLoader } from "./ZagrebMapLoader";
@@ -5,9 +6,10 @@ import { ZagrebMapLoader } from "./ZagrebMapLoader";
 type Props = {
   copy: Dictionary["map"];
   locations: ParkingLocation[];
+  evStations: EvChargingStation[];
 };
 
-export function MapPlaceholder({ copy, locations }: Props) {
+export function MapPlaceholder({ copy, locations, evStations }: Props) {
   return (
     <section id="map" className="scroll-mt-20 border-y border-zinc-200/80 bg-zinc-50/30 px-4 py-12 dark:border-zinc-800/80 dark:bg-zinc-950/20 sm:px-6">
       <div className="mx-auto max-w-6xl">
@@ -20,6 +22,7 @@ export function MapPlaceholder({ copy, locations }: Props) {
         <div className="mt-6">
           <ZagrebMapLoader
             locations={locations}
+            evStations={evStations}
             loadingLabel={copy.loadingMap}
             freeSpotsLabel={copy.freeInPopup}
             capacityLabel={copy.capacityLabel}
@@ -30,9 +33,15 @@ export function MapPlaceholder({ copy, locations }: Props) {
             searchAriaLabel={copy.searchAriaLabel}
             searchHelper={copy.searchHelper}
             nearestTitle={copy.nearestTitle}
+            nearestEvTitle={copy.nearestEvTitle}
             nearestHint={copy.nearestHint}
             distanceMeters={copy.distanceMeters}
             distanceKilometers={copy.distanceKilometers}
+            evConnectorsLabel={copy.evConnectorsLabel}
+            evTypeLabel={copy.evTypeLabel}
+            evUnknownConnectors={copy.evUnknownConnectors}
+            evUnknownType={copy.evUnknownType}
+            showEvChargingLabel={copy.showEvChargingLabel}
           />
         </div>
       </div>

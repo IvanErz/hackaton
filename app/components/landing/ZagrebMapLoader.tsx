@@ -1,11 +1,13 @@
 "use client";
 
+import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 
 type Props = {
   locations: ParkingLocation[];
+  evStations: EvChargingStation[];
   loadingLabel: string;
   freeSpotsLabel: string;
   capacityLabel: string;
@@ -16,13 +18,20 @@ type Props = {
   searchAriaLabel: string;
   searchHelper: string;
   nearestTitle: string;
+  nearestEvTitle: string;
   nearestHint: string;
   distanceMeters: string;
   distanceKilometers: string;
+  evConnectorsLabel: string;
+  evTypeLabel: string;
+  evUnknownConnectors: string;
+  evUnknownType: string;
+  showEvChargingLabel: string;
 };
 
 export function ZagrebMapLoader({
   locations,
+  evStations,
   loadingLabel,
   freeSpotsLabel,
   capacityLabel,
@@ -33,9 +42,15 @@ export function ZagrebMapLoader({
   searchAriaLabel,
   searchHelper,
   nearestTitle,
+  nearestEvTitle,
   nearestHint,
   distanceMeters,
   distanceKilometers,
+  evConnectorsLabel,
+  evTypeLabel,
+  evUnknownConnectors,
+  evUnknownType,
+  showEvChargingLabel,
 }: Props) {
   const ZagrebMapDynamic = useMemo(
     () =>
@@ -68,6 +83,7 @@ export function ZagrebMapLoader({
   return (
     <ZagrebMapDynamic
       locations={locations}
+      evStations={evStations}
       freeSpotsLabel={freeSpotsLabel}
       capacityLabel={capacityLabel}
       mockEstimateNote={mockEstimateNote}
@@ -77,9 +93,15 @@ export function ZagrebMapLoader({
       searchAriaLabel={searchAriaLabel}
       searchHelper={searchHelper}
       nearestTitle={nearestTitle}
+      nearestEvTitle={nearestEvTitle}
       nearestHint={nearestHint}
       distanceMeters={distanceMeters}
       distanceKilometers={distanceKilometers}
+      evConnectorsLabel={evConnectorsLabel}
+      evTypeLabel={evTypeLabel}
+      evUnknownConnectors={evUnknownConnectors}
+      evUnknownType={evUnknownType}
+      showEvChargingLabel={showEvChargingLabel}
     />
   );
 }
