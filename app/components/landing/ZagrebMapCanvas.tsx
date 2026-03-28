@@ -16,16 +16,30 @@ const mapOptions: google.maps.MapOptions = {
   fullscreenControl: true,
 };
 
+/** Distinct from blue garage circles */
 const destinationIcon: google.maps.Icon = {
-  url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
 };
+
+const evChargingIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+  <circle cx="16" cy="16" r="14" fill="#16a34a" stroke="#fff" stroke-width="2"/>
+  <path fill="#fff" d="M18 7 10 16.5h4.5L13 26l10-9.5h-4.5L18 7z"/>
+</svg>`;
 
 const evChargingIcon: google.maps.Icon = {
-  url: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+  url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(evChargingIconSvg)}`,
+  scaledSize: { width: 32, height: 32 } as google.maps.Size,
+  anchor: { x: 16, y: 16 } as google.maps.Point,
 };
 
+const garageCircleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+  <circle cx="11" cy="11" r="9" fill="#2563eb" stroke="#fff" stroke-width="2"/>
+</svg>`;
+
 const garageIcon: google.maps.Icon = {
-  url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+  url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(garageCircleSvg)}`,
+  scaledSize: { width: 22, height: 22 } as google.maps.Size,
+  anchor: { x: 11, y: 11 } as google.maps.Point,
 };
 
 type Props = {
@@ -187,9 +201,9 @@ export function ZagrebMapCanvas({
           position={{ lat: selectedEv.lat, lng: selectedEv.lng }}
           onCloseClick={() => setSelectedEvId(null)}
         >
-          <div className="min-w-[220px] max-w-[260px] overflow-hidden rounded-lg border border-amber-200/90 bg-white text-sm text-zinc-900 shadow-sm dark:border-amber-800/50 dark:bg-zinc-950">
-            <div className="bg-gradient-to-r from-amber-500 to-amber-400 px-3 py-2.5">
-              <p className="font-semibold leading-snug text-amber-950">{selectedEv.name}</p>
+          <div className="min-w-[220px] max-w-[260px] overflow-hidden rounded-lg border border-emerald-200/90 bg-white text-sm text-zinc-900 shadow-sm dark:border-emerald-800/50 dark:bg-zinc-950">
+            <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-3 py-2.5">
+              <p className="font-semibold leading-snug text-white">{selectedEv.name}</p>
             </div>
             <div className="space-y-2 px-3 py-3">
               <p className="leading-relaxed text-zinc-600 dark:text-zinc-300">{selectedEv.address}</p>

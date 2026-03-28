@@ -1732,6 +1732,18 @@
   }
 
   @media (prefers-color-scheme: dark) {
+    .dark\:border-emerald-800\/50 {
+      border-color: #005f4680;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .dark\:border-emerald-800\/50 {
+        border-color: color-mix(in oklab, var(--color-emerald-800) 50%, transparent);
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
     .dark\:border-emerald-800\/60 {
       border-color: #005f4699;
     }
