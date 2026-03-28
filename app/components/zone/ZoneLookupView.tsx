@@ -1,9 +1,8 @@
-// Backend: replace submit handler with API / geocoding + zone resolution.
-
 "use client";
 
 import { ZagrebPlaceAutocomplete, readZagrebPlaceAutocompleteValue } from "@/app/components/landing/ZagrebPlaceAutocomplete";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import type { ZoneLookupErrorBody, ZoneLookupResponseBody } from "@/lib/zone-lookup-types";
 import type { PlaceAutocompleteWidget } from "@/app/components/landing/zagreb-map-shared";
 import type { Libraries } from "@react-google-maps/api";
 import { LoadScript } from "@react-google-maps/api";
@@ -15,18 +14,28 @@ type Props = {
   copy: Dictionary["zonePage"];
 };
 
-type Phase = "idle" | "loading" | "placeholder";
+type Phase = "idle" | "loading" | "result" | "error";
+
+function formatBlockLine(r: ZoneLookupResponseBody): string {
+  const { blockId, blockName } = r;
+  if (blockId && blockName) return `${blockId} — ${blockName}`;
+  return blockId ?? blockName ?? "";
+}
 
 export function ZoneLookupView({ copy }: Props) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
   const [scriptReady, setScriptReady] = useState(false);
   const [address, setAddress] = useState("");
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
   const [validationError, setValidationError] = useState(false);
+  const [result, setResult] = useState<ZoneLookupResponseBody | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const widgetRef = useRef<PlaceAutocompleteWidget | null>(null);
 
   const handlePlaceSelected = useCallback(
-    (_coords: { lat: number; lng: number }, displayName?: string | null) => {
+    (c: { lat: number; lng: number }, displayName?: string | null) => {
+      setCoords(c);
       if (displayName) setAddress(displayName);
       setValidationError((v) => (v ? false : v));
     },
@@ -38,8 +47,18 @@ export function ZoneLookupView({ copy }: Props) {
     setValidationError((v) => (v ? false : v));
   }, []);
 
+  const resolveErrorCopy = useCallback(
+    (code: string | undefined) => {
+      if (code === "NOT_CONFIGURED") return copy.errorNotConfigured;
+      if (code === "BAD_INPUT") return copy.errorBadInput;
+      if (code === "MODEL_ERROR") return copy.errorModel;
+      return copy.errorGeneric;
+    },
+    [copy]
+  );
+
   const handleSubmit = useCallback(
-    (e: FormEvent) => {
+    async (e: FormEvent) => {
       e.preventDefault();
       const raw =
         apiKey && widgetRef.current
@@ -52,11 +71,36 @@ export function ZoneLookupView({ copy }: Props) {
       }
       setValidationError(false);
       setPhase("loading");
-      window.setTimeout(() => {
-        setPhase("placeholder");
-      }, 450);
+      setErrorMessage(null);
+      setResult(null);
+
+      try {
+        const res = await fetch("/api/zone", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            address: trimmed,
+            ...(coords ? { lat: coords.lat, lng: coords.lng } : {}),
+          }),
+        });
+
+        const data: unknown = await res.json().catch(() => null);
+
+        if (!res.ok) {
+          const err = data as ZoneLookupErrorBody | null;
+          setErrorMessage(resolveErrorCopy(err?.error));
+          setPhase("error");
+          return;
+        }
+
+        setResult(data as ZoneLookupResponseBody);
+        setPhase("result");
+      } catch {
+        setErrorMessage(copy.errorGeneric);
+        setPhase("error");
+      }
     },
-    [apiKey, address]
+    [apiKey, address, coords, copy.errorGeneric, resolveErrorCopy]
   );
 
   const formInner = (useAutocomplete: boolean) => (
@@ -153,18 +197,35 @@ export function ZoneLookupView({ copy }: Props) {
             </div>
           ) : null}
 
-          {phase === "placeholder" ? (
+          {phase === "error" && errorMessage ? (
+            <p className="mt-3 text-sm text-red-600 dark:text-red-400" role="alert">
+              {errorMessage}
+            </p>
+          ) : null}
+
+          {phase === "result" && result ? (
             <div className="mt-4 space-y-4">
               <dl className="grid gap-3 text-sm sm:grid-cols-2">
                 <div className="rounded-lg border border-zinc-200/80 bg-white/80 px-3 py-2.5 dark:border-zinc-700 dark:bg-zinc-900/50">
                   <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">{copy.zoneLabel}</dt>
-                  <dd className="mt-1 text-lg font-semibold tabular-nums text-foreground">{copy.dash}</dd>
+                  <dd className="mt-1 text-lg font-semibold tabular-nums text-foreground">
+                    {result.majorZone ?? copy.dash}
+                  </dd>
                 </div>
                 <div className="rounded-lg border border-zinc-200/80 bg-white/80 px-3 py-2.5 dark:border-zinc-700 dark:bg-zinc-900/50">
                   <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">{copy.blockLabel}</dt>
-                  <dd className="mt-1 text-lg font-semibold tabular-nums text-foreground">{copy.dash}</dd>
+                  <dd className="mt-1 text-lg font-semibold tabular-nums text-foreground">
+                    {formatBlockLine(result) || copy.dash}
+                  </dd>
                 </div>
               </dl>
+              <div className="rounded-lg border border-zinc-200/80 bg-white/80 px-3 py-2.5 dark:border-zinc-700 dark:bg-zinc-900/50">
+                <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">{copy.confidenceLabel}</p>
+                <p className="mt-1 text-sm font-medium text-foreground">{copy.confidence[result.confidence]}</p>
+              </div>
+              {result.note ? (
+                <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{result.note}</p>
+              ) : null}
               <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">{copy.backendNote}</p>
             </div>
           ) : null}

@@ -96,11 +96,11 @@ const hr = {
     metadata: {
       title: "ParkSpot Zagreb — koja je parkirna zona?",
       description:
-        "Unesite adresu u Zagrebu i saznajte u koju parkirnu zonu (I–IV) spada lokacija — sučelje za povezivanje s backendom.",
+        "Unesite adresu u Zagrebu i saznajte u koju parkirnu zonu (I–IV) spada lokacija — AI procjena na temelju tekstualnog izvoda uredbe.",
     },
     title: "Provjera parkirne zone",
     subtitle:
-      "Upišite adresu ili lokaciju u Zagrebu. Prikaz zone ovdje je predložak — podatke će dostaviti vaš backend nakon geokodiranja i pravila.",
+      "Upišite adresu ili lokaciju u Zagrebu. Zona se procjenjuje pomoću umjetne inteligencije (Gemini) na temelju tekstualnog izvoda gradske uredbe — nije službena potvrda Grada.",
     addressLabel: "Adresa",
     addressPlaceholder: "npr. Ilica 10, Zagreb",
     submitButton: "Provjeri zonu",
@@ -111,8 +111,20 @@ const hr = {
     zoneLabel: "Zona",
     blockLabel: "Blok",
     dash: "—",
-    backendNote: "Povezivanje s API-jem / geokodiranjem i pravilima zona uslijedi.",
+    backendNote:
+      "Ovo je informativna procjena iz tekstualnog izvoda pravila. Za konačnu tarifu provjerite službene izvore.",
     validationEmpty: "Unesite adresu.",
+    errorNotConfigured:
+      "Poslužitelj nema postavljen GEMINI_API_KEY. Dodajte ključ u .env.local (Google AI Studio) i ponovno pokrenite aplikaciju.",
+    errorBadInput: "Neispravan zahtjev. Pokušajte ponovo.",
+    errorModel: "Model trenutno ne može odgovoriti. Pokušajte kasnije.",
+    errorGeneric: "Došlo je do greške pri provjeri zone. Pokušajte ponovo.",
+    confidenceLabel: "Sigurnost procjene",
+    confidence: {
+      high: "Visoka",
+      medium: "Srednja",
+      low: "Niska",
+    },
   },
   footer: {
     copyright: "ParkSpot Zagreb. Demo sučelje — podaci su ilustrativni.",
@@ -232,11 +244,11 @@ const en: Dictionary = {
     metadata: {
       title: "ParkSpot Zagreb — which parking zone?",
       description:
-        "Enter a Zagreb address to see which parking zone (I–IV) applies — UI ready for your backend.",
+        "Enter a Zagreb address to see which parking zone (I–IV) applies — AI estimate from a text ordinance excerpt.",
     },
     title: "Parking zone lookup",
     subtitle:
-      "Type an address or place in Zagreb. The zone shown here is a layout placeholder until your backend resolves geocoding and tariff rules.",
+      "Enter a Zagreb address or place. The zone is estimated with AI (Gemini) from a text excerpt of the city ordinance — not an official City determination.",
     addressLabel: "Address",
     addressPlaceholder: "e.g. Ilica 10, Zagreb",
     submitButton: "Check zone",
@@ -247,8 +259,20 @@ const en: Dictionary = {
     zoneLabel: "Zone",
     blockLabel: "Block",
     dash: "—",
-    backendNote: "API / geocoding and zone rules hookup coming next.",
+    backendNote:
+      "This is an informational estimate from a text rules excerpt. Confirm the tariff with official sources.",
     validationEmpty: "Please enter an address.",
+    errorNotConfigured:
+      "The server has no GEMINI_API_KEY set. Add your key from Google AI Studio to .env.local and restart the app.",
+    errorBadInput: "Invalid request. Please try again.",
+    errorModel: "The model could not respond right now. Try again later.",
+    errorGeneric: "Something went wrong checking the zone. Please try again.",
+    confidenceLabel: "Confidence",
+    confidence: {
+      high: "High",
+      medium: "Medium",
+      low: "Low",
+    },
   },
   footer: {
     copyright: "ParkSpot Zagreb. Demo UI — data is illustrative.",
