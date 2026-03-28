@@ -161,6 +161,10 @@ const hr = {
         pricePerHour: "—",
         distanceLabel: "—"
     },
+    parkingPriceLabels: {
+        free: "Besplatno",
+        paidUnknown: "Plaćeno parkiranje"
+    },
     parking: {}
 };
 const en = {
@@ -261,6 +265,10 @@ const en = {
     parkingDefaults: {
         pricePerHour: "—",
         distanceLabel: "—"
+    },
+    parkingPriceLabels: {
+        free: "Free",
+        paidUnknown: "Paid parking"
     },
     parking: {}
 };

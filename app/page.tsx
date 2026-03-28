@@ -24,8 +24,17 @@ export default async function Home() {
       <Hero copy={dict.hero} />
       <StatsRow stats={dict.stats} />
       <HowItWorks copy={dict.howItWorks} />
-      <MapPlaceholder copy={dict.map} locations={locations} evStations={evStations} />
-      <FreeSpacesGrid grid={dict.grid} locations={locations} />
+      <MapPlaceholder
+        copy={dict.map}
+        parkingPriceLabels={dict.parkingPriceLabels}
+        locations={locations}
+        evStations={evStations}
+      />
+      <FreeSpacesGrid
+        grid={dict.grid}
+        parkingPriceLabels={dict.parkingPriceLabels}
+        locations={locations}
+      />
       <PricingPlaceholder copy={dict.pricing} />
       <Footer copy={dict.footer} />
     </div>

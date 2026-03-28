@@ -8,6 +8,7 @@ import { useMemo } from "react";
 type Props = {
   locations: ParkingLocation[];
   evStations: EvChargingStation[];
+  parkingPriceLabels: { free: string; paidUnknown: string };
   loadingLabel: string;
   freeSpotsLabel: string;
   capacityLabel: string;
@@ -32,6 +33,7 @@ type Props = {
 export function ZagrebMapLoader({
   locations,
   evStations,
+  parkingPriceLabels,
   loadingLabel,
   freeSpotsLabel,
   capacityLabel,
@@ -84,6 +86,7 @@ export function ZagrebMapLoader({
     <ZagrebMapDynamic
       locations={locations}
       evStations={evStations}
+      parkingPriceLabels={parkingPriceLabels}
       freeSpotsLabel={freeSpotsLabel}
       capacityLabel={capacityLabel}
       mockEstimateNote={mockEstimateNote}

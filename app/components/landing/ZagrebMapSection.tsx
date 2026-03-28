@@ -13,6 +13,7 @@ const MAP_SCRIPT_LIBRARIES = [] as const satisfies Libraries;
 type Props = {
   locations: ParkingLocation[];
   evStations: EvChargingStation[];
+  parkingPriceLabels: { free: string; paidUnknown: string };
   freeSpotsLabel: string;
   capacityLabel: string;
   mockEstimateNote: string;
@@ -36,6 +37,7 @@ type Props = {
 export function ZagrebMapSection({
   locations,
   evStations,
+  parkingPriceLabels,
   freeSpotsLabel,
   capacityLabel,
   mockEstimateNote,
@@ -200,6 +202,7 @@ export function ZagrebMapSection({
             freeSpotsLabel={freeSpotsLabel}
             capacityLabel={capacityLabel}
             mockEstimateNote={mockEstimateNote}
+            parkingPriceLabels={parkingPriceLabels}
             evConnectorsLabel={evConnectorsLabel}
             evTypeLabel={evTypeLabel}
             evUnknownConnectors={evUnknownConnectors}

@@ -1,6 +1,7 @@
 "use client";
 
 import type { EvChargingStation } from "@/lib/ev-charging-stations";
+import { formatParkingPrice, isPlaceholderDistance } from "@/lib/parking-price-display";
 import { ZAGREB_CENTER, type ParkingLocation } from "@/lib/mock-parking-spaces";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useCallback, useEffect, useRef } from "react";
@@ -74,6 +75,7 @@ export function ZagrebMapCanvas({
   freeSpotsLabel,
   capacityLabel,
   mockEstimateNote,
+  parkingPriceLabels,
   evConnectorsLabel,
   evTypeLabel,
   evUnknownConnectors,
@@ -187,11 +189,20 @@ export function ZagrebMapCanvas({
               <p className="border-t border-zinc-100 pt-2 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
                 {mockEstimateNote}
               </p>
-              {selected.pricePerHour !== "—" || selected.distanceLabel !== "—" ? (
-                <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                  {selected.pricePerHour} · {selected.distanceLabel}
-                </p>
-              ) : null}
+              <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
+                {!isPlaceholderDistance(selected.distanceLabel) ? (
+                  <>
+                    {selected.distanceLabel}
+                    <span className="mx-1.5 font-normal text-zinc-400 dark:text-zinc-500" aria-hidden>
+                      ·
+                    </span>
+                  </>
+                ) : null}
+                {formatParkingPrice(selected.pricePerHour, {
+                  free: parkingPriceLabels.free,
+                  paidUnknown: parkingPriceLabels.paidUnknown,
+                })}
+              </p>
             </div>
           </div>
         </InfoWindow>

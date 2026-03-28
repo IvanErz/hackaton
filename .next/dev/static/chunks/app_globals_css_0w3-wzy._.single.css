@@ -109,6 +109,7 @@
     --text-4xl--line-height: calc(2.5 / 2.25);
     --text-5xl: 3rem;
     --text-5xl--line-height: 1;
+    --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
@@ -495,6 +496,10 @@
     .container {
       max-width: 96rem;
     }
+  }
+
+  .mx-1\.5 {
+    margin-inline: calc(var(--spacing) * 1.5);
   }
 
   .mx-auto {
@@ -1224,6 +1229,11 @@
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
+  }
+
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
   }
 
   .font-semibold {

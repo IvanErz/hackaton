@@ -1,8 +1,10 @@
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { formatParkingPrice, isPlaceholderDistance } from "@/lib/parking-price-display";
 
 type Props = {
   grid: Dictionary["grid"];
+  parkingPriceLabels: Dictionary["parkingPriceLabels"];
   locations: ParkingLocation[];
 };
 
@@ -27,7 +29,7 @@ function StatusBadge({
   );
 }
 
-export function FreeSpacesGrid({ grid, locations }: Props) {
+export function FreeSpacesGrid({ grid, parkingPriceLabels, locations }: Props) {
   const badgeLabels = { badgeOpen: grid.badgeOpen, badgeLimited: grid.badgeLimited };
 
   return (
@@ -60,11 +62,20 @@ export function FreeSpacesGrid({ grid, locations }: Props) {
                 <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-600">{grid.mockEstimateNote}</p>
               )}
               <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-zinc-100 pt-4 text-sm text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
-                <span>{loc.distanceLabel}</span>
-                <span className="text-zinc-300 dark:text-zinc-600" aria-hidden>
-                  ·
+                {isPlaceholderDistance(loc.distanceLabel) ? null : (
+                  <>
+                    <span>{loc.distanceLabel}</span>
+                    <span className="text-zinc-300 dark:text-zinc-600" aria-hidden>
+                      ·
+                    </span>
+                  </>
+                )}
+                <span className="font-medium text-zinc-800 dark:text-zinc-200">
+                  {formatParkingPrice(loc.pricePerHour, {
+                    free: parkingPriceLabels.free,
+                    paidUnknown: parkingPriceLabels.paidUnknown,
+                  })}
                 </span>
-                <span>{loc.pricePerHour}</span>
               </div>
             </li>
           ))}

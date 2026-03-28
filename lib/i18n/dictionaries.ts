@@ -97,6 +97,10 @@ const hr = {
     pricePerHour: "—",
     distanceLabel: "—",
   },
+  parkingPriceLabels: {
+    free: "Besplatno",
+    paidUnknown: "Plaćeno parkiranje",
+  },
   parking: {},
 };
 
@@ -197,6 +201,10 @@ const en: Dictionary = {
   parkingDefaults: {
     pricePerHour: "—",
     distanceLabel: "—",
+  },
+  parkingPriceLabels: {
+    free: "Free",
+    paidUnknown: "Paid parking",
   },
   parking: {},
 };
