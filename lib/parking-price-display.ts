@@ -24,6 +24,36 @@ export function formatParkingPrice(
   return pricePerHour;
 }
 
+type GaragePriceLabels = {
+  free: string;
+  paidUnknown: string;
+  priceLineSeparator: string;
+};
+
+function segmentLabel(raw: string, labels: { free: string; paidUnknown: string }): string | null {
+  if (isUnknownPriceToken(raw)) return null;
+  const t = raw.trim();
+  if (FREE_PATTERN.test(t) || /^0[,.]0+\s*([€$]|eur|kn)?$/iu.test(t)) {
+    return labels.free;
+  }
+  return raw;
+}
+
+/**
+ * Combines hourly and daily tariff strings; unknown-only shows paidUnknown.
+ */
+export function formatGaragePriceLine(
+  pricePerHour: string,
+  pricePerDay: string,
+  labels: GaragePriceLabels
+): string {
+  const hourPart = segmentLabel(pricePerHour, labels);
+  const dayPart = segmentLabel(pricePerDay, labels);
+  const parts = [hourPart, dayPart].filter((p): p is string => p != null);
+  if (parts.length === 0) return labels.paidUnknown;
+  return parts.join(labels.priceLineSeparator);
+}
+
 export function isPlaceholderDistance(label: string): boolean {
   return isUnknownPriceToken(label);
 }

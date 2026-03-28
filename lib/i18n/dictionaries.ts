@@ -99,11 +99,15 @@ const hr = {
   },
   parkingDefaults: {
     pricePerHour: "—",
+    pricePerDay: "—",
     distanceLabel: "—",
   },
   parkingPriceLabels: {
     free: "Besplatno",
     paidUnknown: "Plaćeno parkiranje",
+    perHourSuffix: "/sat",
+    perDaySuffix: "/24 h",
+    priceLineSeparator: " · ",
   },
   parking: {},
 };
@@ -208,11 +212,15 @@ const en: Dictionary = {
   },
   parkingDefaults: {
     pricePerHour: "—",
+    pricePerDay: "—",
     distanceLabel: "—",
   },
   parkingPriceLabels: {
     free: "Free",
     paidUnknown: "Paid parking",
+    perHourSuffix: "/h",
+    perDaySuffix: "/24 h",
+    priceLineSeparator: " · ",
   },
   parking: {},
 };

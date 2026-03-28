@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
+import { getGarageTariffEur } from "./garage-tariffs";
 import type { ParkingLocation } from "./mock-parking-spaces";
 
 type GarageProps = {
@@ -44,6 +45,8 @@ export function loadJavneGaraze(): ParkingLocation[] {
       const status: ParkingLocation["status"] =
         effectiveCap > 0 && freeCount / effectiveCap < 0.2 ? "limited" : "open";
 
+      const t = getGarageTariffEur(p.OBJECTID);
+
       return {
         id: String(p.OBJECTID),
         name: p.naziv,
@@ -54,6 +57,9 @@ export function loadJavneGaraze(): ParkingLocation[] {
         freeCount,
         status,
         pricePerHour: "",
+        pricePerDay: "",
+        tariffHourEur: t.hourlyEur,
+        tariffDayEur: t.dailyEur,
         distanceLabel: "",
       };
     });

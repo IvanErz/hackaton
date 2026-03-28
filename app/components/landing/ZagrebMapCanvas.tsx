@@ -1,7 +1,7 @@
 "use client";
 
 import type { EvChargingStation } from "@/lib/ev-charging-stations";
-import { formatParkingPrice, isPlaceholderDistance } from "@/lib/parking-price-display";
+import { formatGaragePriceLine, isPlaceholderDistance } from "@/lib/parking-price-display";
 import { ZAGREB_CENTER, type ParkingLocation } from "@/lib/mock-parking-spaces";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { useCallback, useEffect, useRef } from "react";
@@ -60,6 +60,7 @@ type Props = {
   evTypeLabel: string;
   evUnknownConnectors: string;
   evUnknownType: string;
+  parkingPriceLabels: { free: string; paidUnknown: string; priceLineSeparator: string };
 };
 
 export function ZagrebMapCanvas({
@@ -198,9 +199,10 @@ export function ZagrebMapCanvas({
                     </span>
                   </>
                 ) : null}
-                {formatParkingPrice(selected.pricePerHour, {
+                {formatGaragePriceLine(selected.pricePerHour, selected.pricePerDay, {
                   free: parkingPriceLabels.free,
                   paidUnknown: parkingPriceLabels.paidUnknown,
+                  priceLineSeparator: parkingPriceLabels.priceLineSeparator,
                 })}
               </p>
             </div>

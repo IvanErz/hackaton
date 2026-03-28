@@ -6,7 +6,13 @@ export type ParkingLocation = {
   capacity: number | null;
   address: string;
   distanceLabel: string;
+  /** Filled in merge from tariffs + locale; empty before merge. */
   pricePerHour: string;
+  /** 24-hour permit where applicable; empty before merge. */
+  pricePerDay: string;
+  /** Source for merge formatting; null = unknown. */
+  tariffHourEur: number | null;
+  tariffDayEur: number | null;
   status: "open" | "limited";
   lat: number;
   lng: number;

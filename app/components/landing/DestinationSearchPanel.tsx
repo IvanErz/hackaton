@@ -3,6 +3,7 @@
 import type { EvChargingStation } from "@/lib/ev-charging-stations";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import { ZAGREB_CENTER } from "@/lib/mock-parking-spaces";
+import { formatGaragePriceLine } from "@/lib/parking-price-display";
 import {
   formatDistance,
   googleMapsDirectionsFromCurrentLocationUrl,
@@ -42,6 +43,7 @@ type Props = {
   bestParkingTitle: string;
   fromDestinationLabel: string;
   directionsToBestGarageLabel: string;
+  parkingPriceLabels: { free: string; paidUnknown: string; priceLineSeparator: string };
 };
 
 export function DestinationSearchPanel({
@@ -71,6 +73,7 @@ export function DestinationSearchPanel({
   bestParkingTitle,
   fromDestinationLabel,
   directionsToBestGarageLabel,
+  parkingPriceLabels,
 }: Props) {
   const autocompleteContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -183,6 +186,13 @@ export function DestinationSearchPanel({
                   <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-400">
                     {formatDistance(d, distanceMeters, distanceKilometers)} {fromDestinationLabel}
                   </p>
+                  <p className="mt-0.5 text-xs font-medium tabular-nums text-zinc-700 dark:text-zinc-300">
+                    {formatGaragePriceLine(loc.pricePerHour, loc.pricePerDay, {
+                      free: parkingPriceLabels.free,
+                      paidUnknown: parkingPriceLabels.paidUnknown,
+                      priceLineSeparator: parkingPriceLabels.priceLineSeparator,
+                    })}
+                  </p>
                   <a
                     href={googleMapsDirectionsFromCurrentLocationUrl({
                       lat: loc.lat,
@@ -221,11 +231,20 @@ export function DestinationSearchPanel({
                 <button
                   type="button"
                   onClick={() => onFocusGarage(loc)}
-                  className="flex min-h-11 w-full items-center justify-between gap-2 rounded-xl border border-transparent px-3 py-2 text-left text-base text-foreground transition hover:border-zinc-200 hover:bg-zinc-50 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/80 sm:text-sm"
+                  className="flex min-h-11 w-full flex-col items-stretch gap-0.5 rounded-xl border border-transparent px-3 py-2 text-left text-base text-foreground transition hover:border-zinc-200 hover:bg-zinc-50 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/80 sm:text-sm"
                 >
-                  <span className="min-w-0 truncate font-medium">{loc.name}</span>
-                  <span className="shrink-0 tabular-nums text-xs text-zinc-500">
-                    {formatDistance(d, distanceMeters, distanceKilometers)}
+                  <span className="flex min-w-0 items-center justify-between gap-2">
+                    <span className="min-w-0 truncate font-medium">{loc.name}</span>
+                    <span className="shrink-0 tabular-nums text-xs text-zinc-500">
+                      {formatDistance(d, distanceMeters, distanceKilometers)}
+                    </span>
+                  </span>
+                  <span className="truncate text-xs tabular-nums text-zinc-500">
+                    {formatGaragePriceLine(loc.pricePerHour, loc.pricePerDay, {
+                      free: parkingPriceLabels.free,
+                      paidUnknown: parkingPriceLabels.paidUnknown,
+                      priceLineSeparator: parkingPriceLabels.priceLineSeparator,
+                    })}
                   </span>
                 </button>
               </li>

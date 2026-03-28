@@ -1,6 +1,7 @@
 "use client";
 
 import type { EvChargingStation } from "@/lib/ev-charging-stations";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
@@ -8,7 +9,7 @@ import { useMemo } from "react";
 type Props = {
   locations: ParkingLocation[];
   evStations: EvChargingStation[];
-  parkingPriceLabels: { free: string; paidUnknown: string };
+  parkingPriceLabels: Dictionary["parkingPriceLabels"];
   loadingLabel: string;
   freeSpotsLabel: string;
   capacityLabel: string;

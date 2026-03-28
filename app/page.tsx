@@ -15,7 +15,7 @@ import { loadJavneGaraze } from "@/lib/javne-garaze";
 export default async function Home() {
   const locale = await getLocale();
   const dict = getDictionary(locale);
-  const locations = mergeParkingForLocale(loadJavneGaraze(), dict);
+  const locations = mergeParkingForLocale(loadJavneGaraze(), dict, locale);
   const evStations = loadEvChargingStations();
 
   return (

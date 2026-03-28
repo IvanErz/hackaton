@@ -1,6 +1,7 @@
 "use client";
 
 import type { EvChargingStation } from "@/lib/ev-charging-stations";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import type { Libraries } from "@react-google-maps/api";
 import { LoadScript } from "@react-google-maps/api";
@@ -190,6 +191,7 @@ export function ZagrebMapSection({
             bestParkingTitle={bestParkingTitle}
             fromDestinationLabel={fromDestinationLabel}
             directionsToBestGarageLabel={directionsToBestGarageLabel}
+            parkingPriceLabels={parkingPriceLabels}
           />
         </div>
 

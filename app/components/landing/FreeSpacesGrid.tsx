@@ -1,6 +1,6 @@
 import type { ParkingLocation } from "@/lib/mock-parking-spaces";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
-import { formatParkingPrice, isPlaceholderDistance } from "@/lib/parking-price-display";
+import { formatGaragePriceLine, isPlaceholderDistance } from "@/lib/parking-price-display";
 
 type Props = {
   grid: Dictionary["grid"];
@@ -71,9 +71,10 @@ export function FreeSpacesGrid({ grid, parkingPriceLabels, locations }: Props) {
                   </>
                 )}
                 <span className="font-medium text-zinc-800 dark:text-zinc-200">
-                  {formatParkingPrice(loc.pricePerHour, {
+                  {formatGaragePriceLine(loc.pricePerHour, loc.pricePerDay, {
                     free: parkingPriceLabels.free,
                     paidUnknown: parkingPriceLabels.paidUnknown,
+                    priceLineSeparator: parkingPriceLabels.priceLineSeparator,
                   })}
                 </span>
               </div>
