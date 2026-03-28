@@ -9,12 +9,12 @@ import { StatsRow } from "./components/landing/StatsRow";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { mergeParkingForLocale } from "@/lib/i18n/merge-parking";
-import { MOCK_PARKING_SPACES } from "@/lib/mock-parking-spaces";
+import { loadJavneGaraze } from "@/lib/javne-garaze";
 
 export default async function Home() {
   const locale = await getLocale();
   const dict = getDictionary(locale);
-  const locations = mergeParkingForLocale(MOCK_PARKING_SPACES, dict);
+  const locations = mergeParkingForLocale(loadJavneGaraze(), dict);
 
   return (
     <div className="flex min-h-full flex-col">

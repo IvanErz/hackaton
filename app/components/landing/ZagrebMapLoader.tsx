@@ -8,9 +8,17 @@ type Props = {
   locations: ParkingLocation[];
   loadingLabel: string;
   freeSpotsLabel: string;
+  capacityLabel: string;
+  mockEstimateNote: string;
 };
 
-export function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel }: Props) {
+export function ZagrebMapLoader({
+  locations,
+  loadingLabel,
+  freeSpotsLabel,
+  capacityLabel,
+  mockEstimateNote,
+}: Props) {
   const ZagrebMapDynamic = useMemo(
     () =>
       dynamic(
@@ -31,5 +39,12 @@ export function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel }: Pro
     [loadingLabel]
   );
 
-  return <ZagrebMapDynamic locations={locations} freeSpotsLabel={freeSpotsLabel} />;
+  return (
+    <ZagrebMapDynamic
+      locations={locations}
+      freeSpotsLabel={freeSpotsLabel}
+      capacityLabel={capacityLabel}
+      mockEstimateNote={mockEstimateNote}
+    />
+  );
 }

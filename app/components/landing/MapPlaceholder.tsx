@@ -22,6 +22,8 @@ export function MapPlaceholder({ copy, locations }: Props) {
             locations={locations}
             loadingLabel={copy.loadingMap}
             freeSpotsLabel={copy.freeInPopup}
+            capacityLabel={copy.capacityLabel}
+            mockEstimateNote={copy.mockEstimateNote}
           />
         </div>
       </div>

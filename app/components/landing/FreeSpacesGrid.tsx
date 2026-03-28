@@ -52,6 +52,13 @@ export function FreeSpacesGrid({ grid, locations }: Props) {
                 </span>
                 <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{grid.freeLabel}</span>
               </div>
+              {loc.capacity != null ? (
+                <p className="mt-1 text-xs tabular-nums text-zinc-500 dark:text-zinc-500">
+                  {grid.capacityLabel}: {loc.capacity}
+                </p>
+              ) : (
+                <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-600">{grid.mockEstimateNote}</p>
+              )}
               <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-zinc-100 pt-4 text-sm text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
                 <span>{loc.distanceLabel}</span>
                 <span className="text-zinc-300 dark:text-zinc-600" aria-hidden>

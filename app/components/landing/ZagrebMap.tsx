@@ -2,7 +2,8 @@
 
 import { ZAGREB_CENTER, type ParkingLocation } from "@/lib/mock-parking-spaces";
 import L from "leaflet";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 const parkingIcon = L.divIcon({
   className: "leaflet-div-icon parking-marker-pin",
@@ -12,12 +13,27 @@ const parkingIcon = L.divIcon({
   popupAnchor: [0, -10],
 });
 
+function FitBounds({ locations }: { locations: ParkingLocation[] }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (locations.length === 0) return;
+    const bounds = L.latLngBounds(locations.map((l) => [l.lat, l.lng]));
+    if (!bounds.isValid()) return;
+    map.fitBounds(bounds, { padding: [28, 28], maxZoom: 13 });
+  }, [map, locations]);
+
+  return null;
+}
+
 type Props = {
   locations: ParkingLocation[];
   freeSpotsLabel: string;
+  capacityLabel: string;
+  mockEstimateNote: string;
 };
 
-export function ZagrebMap({ locations, freeSpotsLabel }: Props) {
+export function ZagrebMap({ locations, freeSpotsLabel, capacityLabel, mockEstimateNote }: Props) {
   return (
     <MapContainer
       center={ZAGREB_CENTER}
@@ -29,6 +45,7 @@ export function ZagrebMap({ locations, freeSpotsLabel }: Props) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <FitBounds locations={locations} />
       {locations.map((loc) => (
         <Marker key={loc.id} position={[loc.lat, loc.lng]} icon={parkingIcon}>
           <Popup>
@@ -37,8 +54,24 @@ export function ZagrebMap({ locations, freeSpotsLabel }: Props) {
             <span className="text-zinc-600">{loc.address}</span>
             <br />
             <span>
-              {loc.freeCount} {freeSpotsLabel} · {loc.pricePerHour}
+              {loc.freeCount} {freeSpotsLabel}
+              {loc.capacity != null ? (
+                <>
+                  {" "}
+                  · {capacityLabel}: {loc.capacity}
+                </>
+              ) : null}
             </span>
+            <br />
+            <span className="text-xs text-zinc-500">{mockEstimateNote}</span>
+            {loc.pricePerHour !== "—" || loc.distanceLabel !== "—" ? (
+              <>
+                <br />
+                <span className="text-zinc-600">
+                  {loc.pricePerHour} · {loc.distanceLabel}
+                </span>
+              </>
+            ) : null}
           </Popup>
         </Marker>
       ))}
