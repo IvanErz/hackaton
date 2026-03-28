@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "leaflet/dist/leaflet.css";
 
 /* Custom markers: avoid default Leaflet image paths in bundlers */
 .leaflet-div-icon.parking-marker-pin {
