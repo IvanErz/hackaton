@@ -1,4 +1,31 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* Custom markers: avoid default Leaflet image paths in bundlers */
+.leaflet-div-icon.parking-marker-pin {
+  background: transparent !important;
+  border: none !important;
+}
+
+.parking-marker-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: #059669;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 35%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .parking-marker-dot {
+    border-color: #f4f4f5;
+  }
+}
+
+.zagreb-map.leaflet-container {
+  font-family: inherit;
+}
 
 :root {
   --background: #ffffff;

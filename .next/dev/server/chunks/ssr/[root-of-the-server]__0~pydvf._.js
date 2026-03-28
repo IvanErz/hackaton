@@ -740,44 +740,58 @@ function StatsRow() {
 
 __turbopack_context__.s([
     "MOCK_PARKING_SPACES",
-    ()=>MOCK_PARKING_SPACES
+    ()=>MOCK_PARKING_SPACES,
+    "ZAGREB_CENTER",
+    ()=>ZAGREB_CENTER
 ]);
+const ZAGREB_CENTER = [
+    45.815,
+    15.9819
+];
 const MOCK_PARKING_SPACES = [
     {
         id: "1",
-        name: "Central Station Garage",
+        name: "Garaža Glavni kolodvor",
         freeCount: 42,
-        address: "12 Station Rd",
+        address: "Trg kralja Tomislava 12, Zagreb",
         distanceLabel: "240 m",
-        pricePerHour: "$2.50",
-        status: "open"
+        pricePerHour: "2,00 € / h",
+        status: "open",
+        lat: 45.8053,
+        lng: 15.9785
     },
     {
         id: "2",
-        name: "Riverside Lot",
+        name: "Langov trg — otvoreno parkiralište",
         freeCount: 8,
-        address: "88 River Walk",
-        distanceLabel: "0.5 km",
-        pricePerHour: "$1.75",
-        status: "limited"
+        address: "Langov trg, Zagreb",
+        distanceLabel: "0,5 km",
+        pricePerHour: "1,50 € / h",
+        status: "limited",
+        lat: 45.8078,
+        lng: 15.9692
     },
     {
         id: "3",
-        name: "Market Square Underground",
+        name: "Garaža Importanne / Green Gold",
         freeCount: 156,
-        address: "3 Market Pl",
+        address: "Slavonska avenija 6d, Zagreb",
         distanceLabel: "120 m",
-        pricePerHour: "$3.00",
-        status: "open"
+        pricePerHour: "2,50 € / h",
+        status: "open",
+        lat: 45.8071,
+        lng: 15.9584
     },
     {
         id: "4",
-        name: "Tech Campus East",
+        name: "Garaža Arena Zagreb",
         freeCount: 23,
-        address: "401 Innovation Dr",
-        distanceLabel: "1.2 km",
-        pricePerHour: "Free 1st hr",
-        status: "open"
+        address: "Lanište ul. bb, Zagreb",
+        distanceLabel: "1,2 km",
+        pricePerHour: "Prvi sat besplatno",
+        status: "open",
+        lat: 45.7649,
+        lng: 15.9466
     }
 ];
 }),

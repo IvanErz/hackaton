@@ -1,10 +1,10 @@
-const stats = [
-  { value: "2.4k+", label: "Spaces tracked" },
-  { value: "18", label: "City zones" },
-  { value: "<5s", label: "Refresh time" },
-];
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 
-export function StatsRow() {
+type Props = {
+  stats: Dictionary["stats"];
+};
+
+export function StatsRow({ stats }: Props) {
   return (
     <section className="border-b border-zinc-200/80 bg-zinc-50/50 px-4 py-10 dark:border-zinc-800/80 dark:bg-zinc-950/30 sm:px-6">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-4">
