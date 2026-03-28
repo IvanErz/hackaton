@@ -83,22 +83,47 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 ;
-function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabel, mockEstimateNote, missingApiKeyMessage }) {
+function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabel, mockEstimateNote, missingApiKeyMessage, searchLabel, searchPlaceholder, searchAriaLabel, searchHelper, nearestTitle, nearestHint, distanceMeters, distanceKilometers }) {
     const ZagrebMapDynamic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])(async ()=>{}, {
             loadableGenerated: {
                 modules: [
-                    "[project]/app/components/landing/ZagrebMap.tsx [app-client] (ecmascript, next/dynamic entry)"
+                    "[project]/app/components/landing/ZagrebMapSection.tsx [app-client] (ecmascript, next/dynamic entry)"
                 ]
             },
             ssr: false,
             loading: ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex h-[min(56vh,420px)] min-h-[240px] w-full items-center justify-center rounded-2xl border border-zinc-200 bg-zinc-100/80 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900/50 dark:text-zinc-400 sm:h-[min(50vh,480px)] sm:min-h-[280px]",
+                    className: "flex min-h-[280px] w-full flex-col gap-6",
                     role: "status",
                     "aria-live": "polite",
-                    children: loadingLabel
-                }, void 0, false, {
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "sr-only",
+                            children: loadingLabel
+                        }, void 0, false, {
+                            fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
+                            lineNumber: 52,
+                            columnNumber: 15
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "h-28 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100/80 dark:border-zinc-800 dark:bg-zinc-900/50",
+                            "aria-hidden": true
+                        }, void 0, false, {
+                            fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
+                            lineNumber: 53,
+                            columnNumber: 15
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "min-h-[min(56vh,420px)] flex-1 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100/80 dark:border-zinc-800 dark:bg-zinc-900/50 sm:min-h-[min(50vh,480px)]",
+                            "aria-hidden": true
+                        }, void 0, false, {
+                            fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
+                            lineNumber: 57,
+                            columnNumber: 15
+                        }, this)
+                    ]
+                }, void 0, true, {
                     fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-                    lineNumber: 31,
+                    lineNumber: 47,
                     columnNumber: 13
                 }, this)
         }), [
@@ -109,10 +134,18 @@ function ZagrebMapLoader({ locations, loadingLabel, freeSpotsLabel, capacityLabe
         freeSpotsLabel: freeSpotsLabel,
         capacityLabel: capacityLabel,
         mockEstimateNote: mockEstimateNote,
-        missingApiKeyMessage: missingApiKeyMessage
+        missingApiKeyMessage: missingApiKeyMessage,
+        searchLabel: searchLabel,
+        searchPlaceholder: searchPlaceholder,
+        searchAriaLabel: searchAriaLabel,
+        searchHelper: searchHelper,
+        nearestTitle: nearestTitle,
+        nearestHint: nearestHint,
+        distanceMeters: distanceMeters,
+        distanceKilometers: distanceKilometers
     }, void 0, false, {
         fileName: "[project]/app/components/landing/ZagrebMapLoader.tsx",
-        lineNumber: 45,
+        lineNumber: 69,
         columnNumber: 5
     }, this);
 }

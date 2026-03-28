@@ -14,6 +14,7 @@ type Props = {
   searchLabel: string;
   searchPlaceholder: string;
   searchAriaLabel: string;
+  searchHelper: string;
   nearestTitle: string;
   nearestHint: string;
   distanceMeters: string;
@@ -30,6 +31,7 @@ export function ZagrebMapLoader({
   searchLabel,
   searchPlaceholder,
   searchAriaLabel,
+  searchHelper,
   nearestTitle,
   nearestHint,
   distanceMeters,
@@ -38,16 +40,24 @@ export function ZagrebMapLoader({
   const ZagrebMapDynamic = useMemo(
     () =>
       dynamic(
-        () => import("./ZagrebMap").then((mod) => mod.ZagrebMap),
+        () => import("./ZagrebMapSection").then((mod) => mod.ZagrebMapSection),
         {
           ssr: false,
           loading: () => (
             <div
-              className="flex h-[min(56vh,420px)] min-h-[240px] w-full items-center justify-center rounded-2xl border border-zinc-200 bg-zinc-100/80 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900/50 dark:text-zinc-400 sm:h-[min(50vh,480px)] sm:min-h-[280px]"
+              className="flex min-h-[280px] w-full flex-col gap-6"
               role="status"
               aria-live="polite"
             >
-              {loadingLabel}
+              <span className="sr-only">{loadingLabel}</span>
+              <div
+                className="h-28 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100/80 dark:border-zinc-800 dark:bg-zinc-900/50"
+                aria-hidden
+              />
+              <div
+                className="min-h-[min(56vh,420px)] flex-1 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100/80 dark:border-zinc-800 dark:bg-zinc-900/50 sm:min-h-[min(50vh,480px)]"
+                aria-hidden
+              />
             </div>
           ),
         }
@@ -65,6 +75,7 @@ export function ZagrebMapLoader({
       searchLabel={searchLabel}
       searchPlaceholder={searchPlaceholder}
       searchAriaLabel={searchAriaLabel}
+      searchHelper={searchHelper}
       nearestTitle={nearestTitle}
       nearestHint={nearestHint}
       distanceMeters={distanceMeters}

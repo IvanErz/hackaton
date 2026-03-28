@@ -17,7 +17,7 @@ export function MapPlaceholder({ copy, locations }: Props) {
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{copy.subtitle}</p>
           </div>
         </div>
-        <div className="mt-6 overflow-hidden rounded-2xl border border-zinc-200 shadow-sm ring-1 ring-zinc-200/60 dark:border-zinc-800 dark:ring-zinc-800/80">
+        <div className="mt-6">
           <ZagrebMapLoader
             locations={locations}
             loadingLabel={copy.loadingMap}
@@ -28,6 +28,7 @@ export function MapPlaceholder({ copy, locations }: Props) {
             searchLabel={copy.searchLabel}
             searchPlaceholder={copy.searchPlaceholder}
             searchAriaLabel={copy.searchAriaLabel}
+            searchHelper={copy.searchHelper}
             nearestTitle={copy.nearestTitle}
             nearestHint={copy.nearestHint}
             distanceMeters={copy.distanceMeters}

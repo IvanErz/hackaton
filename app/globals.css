@@ -4,10 +4,13 @@
   font-family: inherit;
 }
 
-/* Google PlaceAutocompleteElement (web component) — full width in search row */
+/* Google PlaceAutocompleteElement — full width, 16px text (avoids iOS zoom on focus) */
 .zagreb-place-autocomplete-host gmp-place-autocomplete {
   display: block;
   width: 100%;
+  min-height: 2.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 :root {
