@@ -1,0 +1,18 @@
+{"timestamp":"00:00:02.072","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:35.451","source":"Server","level":"LOG","message":"○ Compiling / ..."}
+{"timestamp":"00:00:36.864","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:36.961","source":"Browser","level":"WARN","message":"Image with src \"http://localhost:3000/vercel.svg\" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: \"auto\"' or 'height: \"auto\"' to maintain the aspect ratio."}
+{"timestamp":"00:00:36.989","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mImage with src \\\"http://localhost:3000/vercel.svg\\\" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: \\\"auto\\\"' or 'height: \\\"auto\\\"' to maintain the aspect ratio.\\u001b[39m\""}
+{"timestamp":"00:00:36.990","source":"Browser","level":"WARN","message":"\u001b[33mImage with src \"http://localhost:3000/vercel.svg\" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: \"auto\"' or 'height: \"auto\"' to maintain the aspect ratio.\u001b[39m"}
+{"timestamp":"00:04:18.475","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:04:19.441","source":"Browser","level":"WARN","message":"Image with src \"http://localhost:3000/vercel.svg\" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: \"auto\"' or 'height: \"auto\"' to maintain the aspect ratio."}
+{"timestamp":"00:04:19.442","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mImage with src \\\"http://localhost:3000/vercel.svg\\\" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: \\\"auto\\\"' or 'height: \\\"auto\\\"' to maintain the aspect ratio.\\u001b[39m\""}
+{"timestamp":"00:04:19.443","source":"Browser","level":"WARN","message":"\u001b[33mImage with src \"http://localhost:3000/vercel.svg\" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: \"auto\"' or 'height: \"auto\"' to maintain the aspect ratio.\u001b[39m"}
+{"timestamp":"00:10:15.020","source":"Server","level":"LOG","message":"✓ Compiled in 181ms"}
+{"timestamp":"00:10:17.682","source":"Server","level":"LOG","message":"✓ Compiled in 86ms"}
+{"timestamp":"00:10:20.970","source":"Server","level":"LOG","message":"✓ Compiled in 153ms"}
+{"timestamp":"00:10:34.169","source":"Server","level":"LOG","message":"✓ Compiled in 247ms"}
+{"timestamp":"00:10:37.915","source":"Server","level":"LOG","message":"✓ Compiled in 284ms"}
+{"timestamp":"00:10:44.817","source":"Server","level":"LOG","message":"✓ Compiled in 140ms"}
+{"timestamp":"00:10:46.619","source":"Server","level":"LOG","message":"✓ Compiled in 116ms"}
+{"timestamp":"00:11:03.113","source":"Server","level":"LOG","message":"✓ Compiled in 1070ms"}
